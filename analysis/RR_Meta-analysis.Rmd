@@ -489,7 +489,6 @@ bubble(year.metareg,
        col.line = "blue",
        studlab = F)
 
-
 ```
 
 
