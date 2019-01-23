@@ -1,0 +1,15 @@
+author,Response rate,Lo 95% CI,Hi 95% CI
+"Kongsved et al, 2007",0.11,0.001828926,0.39
+"Mlikotic et al, 2016",0.54,0.000258477,0.73
+"Hagan et al, 2017",-0.06,0.003520952,0.27
+"McCabe, 2004",-1.38,0.001762213,-1.28
+"McCabe et al, 2005",0.01,0.003708416,0.36
+"Le et al, 2018",11.06,0.004841822,11.11
+"Bojcic et al, 2014",0.09,0.000439109,0.22
+"Palmen et al, 2015",0.05,0.023182559,0.97
+"Schwartzenberger et al, 2017",0.00,0.001873065,0.25
+"Callas et al, 2010",0.00,0.001736011,0.24
+"Sinclair et al, 2012",2.91,0.000124282,2.95
+"Fekete et al, 2015",0.40,0.000314542,0.56
+,,,
+Random Effects Model,,,

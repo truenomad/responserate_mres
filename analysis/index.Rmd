@@ -1,0 +1,13 @@
+---
+title: "Home"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: false
+---
+
+Welcome to my website for my MRes thesis data analysis.
+
+This is where all of m data, scrip and results will be shared.
+
+Click on this [link](RR_Meta-analysis.html) to see my results.

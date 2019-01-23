@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Mohamed" />
+
+
+<title>Response Rate Meta-analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Response Rate Met-analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jdblischak/workflowr">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Response Rate Meta-analysis</h1>
+<h4 class="author"><em>Mohamed</em></h4>
+<h4 class="date"><em>22/01/2019</em></h4>
+
+</div>
+
+
+<p><strong>Last updated:</strong> 2019-01-23</p>
+<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
+<ul>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20190123)</code> </summary></p>
+<p>The command <code>set.seed(20190123)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/truenomad/footballanalytics/tree/0d12ee4dd7ec5f1034894ecd5fb2c35032cdaa49" target="_blank">0d12ee4</a> </summary></p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .MCTranscodingSDK/
+    Ignored:    .RData
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    .android/
+    Ignored:    .avidemux6/
+    Ignored:    .madonna/
+    Ignored:    AnacondaProjects/
+    Ignored:    R/.DS_Store
+    Ignored:    R/.RData
+    Ignored:    R/.Rhistory
+    Ignored:    R/Epidemiology in R /.DS_Store
+    Ignored:    R/Epidemiology in R /.RData
+    Ignored:    R/Epidemiology in R /.Rhistory
+    Ignored:    R/Epidemiology in R /MRes/.DS_Store
+    Ignored:    R/Epidemiology in R /MRes/.RData
+    Ignored:    R/Epidemiology in R /MRes/.Rhistory
+    Ignored:    R/Epidemiology in R /MRes/.Rproj.user/
+    Ignored:    R/Epidemiology in R /MRes/Responserate_mres/.DS_Store
+    Ignored:    R/Epidemiology in R /MRes/Responserate_mres/.Rproj.user/
+    Ignored:    R/Epidemiology in R /MRes/Responserate_mres/docs/figure/
+    Ignored:    R/Shiny/
+    Ignored:    work/
+
+Untracked files:
+    Untracked:  .CFUserTextEncoding
+    Untracked:  .DigitalWave/
+    Untracked:  .R/
+    Untracked:  .Rapp.history
+    Untracked:  .Trash/
+    Untracked:  .Xauthority
+    Untracked:  .adobe/
+    Untracked:  .anaconda/
+    Untracked:  .atom/
+    Untracked:  .bash_history
+    Untracked:  .bash_profile
+    Untracked:  .bash_profile-anaconda2.bak
+    Untracked:  .bash_profile-anaconda3.bak
+    Untracked:  .bash_profile.pysave
+    Untracked:  .bash_sessions/
+    Untracked:  .cache/
+    Untracked:  .conda/
+    Untracked:  .condarc
+    Untracked:  .config/
+    Untracked:  .dvdcss/
+    Untracked:  .electrum/
+    Untracked:  .gitconfig
+    Untracked:  .gitignore
+    Untracked:  .idlerc/
+    Untracked:  .ipynb_checkpoints/
+    Untracked:  .ipython/
+    Untracked:  .ivy2/
+    Untracked:  .julia_history
+    Untracked:  .jupyter/
+    Untracked:  .local/
+    Untracked:  .matplotlib/
+    Untracked:  .mcf/
+    Untracked:  .mono/
+    Untracked:  .npm/
+    Untracked:  .oracle_jre_usage/
+    Untracked:  .pgadmin/
+    Untracked:  .pylint.d/
+    Untracked:  .python_history
+    Untracked:  .qgis2/
+    Untracked:  .revman5/
+    Untracked:  .rstudio-desktop/
+    Untracked:  .sbt/
+    Untracked:  .spyder-py3/
+    Untracked:  .ssh/
+    Untracked:  .subversion/
+    Untracked:  .vscode/
+    Untracked:  .wingpersonal6
+    Untracked:  Applications (Parallels)/
+    Untracked:  Applications/
+    Untracked:  Creative Cloud Files/
+    Untracked:  Desktop/
+    Untracked:  Documents/
+    Untracked:  Downloads/
+    Untracked:  Library/
+    Untracked:  Movies/
+    Untracked:  Music/
+    Untracked:  OneDrive - MMU/
+    Untracked:  Parallels/
+    Untracked:  Pictures/
+    Untracked:  Public/
+    Untracked:  Python/
+    Untracked:  R/.Rapp.history
+    Untracked:  R/Epidemiology in R /MRes/.Rapp.history
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/.Rprofile
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/.gitignore
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/LICENSE.Rmd
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/README.md
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres.Rproj
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/.Rprofile
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/.gitignore
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/README.md
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/Responserate_mres.Rproj
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/_workflowr.yml
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/analysis/about.Rmd
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/analysis/license.Rmd
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/code/
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/data/
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/initial_workflowr.R
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/Responserate_mres/output/
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/_workflowr.yml
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/analysis/
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/code/
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/data/
+    Untracked:  R/Epidemiology in R /MRes/Responserate_mres/output/
+    Untracked:  R/Epidemiology in R /SNAPPS/
+    Untracked:  R/Kaggle/
+    Untracked:  R/Machine Learning A-Z /
+    Untracked:  R/Misc/
+    Untracked:  Shared folder - Parallel/
+    Untracked:  Zotero/
+    Untracked:  anaconda3/
+    Untracked:  personal/
+    Untracked:  ~$pair reques letter Malcolm.docx
+    Untracked:  ~$pair request letter to Malcolm.docx
+    Untracked:  ~$ssion statement.docx
+
+Unstaged changes:
+    Deleted:    R/Epidemiology in R /Response Rate Systematic Review (MRes)/Responserate_mres/analysis/_site.yml
+    Deleted:    README.md
+
+</code></pre>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
+</li>
+</ul>
+<hr />
+<div id="get-data-into-r" class="section level1">
+<h1>Get data into R</h1>
+<p>Here we will install and run all the relelvant packages as well upload our data.</p>
+<div id="install-dependencies" class="section level2">
+<h2>Install dependencies</h2>
+<pre class="r"><code># Install dependencces 
+library(prettydoc)
+library(readxl)
+library(meta)
+library(metafor)
+library(dplyr)</code></pre>
+</div>
+<div id="load-the-data-into-r" class="section level2">
+<h2>Load the data into R</h2>
+<pre class="r"><code># Import the data
+RR_data &lt;- readxl::read_xlsx(&quot;Data/RR_data_3.xlsx&quot;)
+
+# Inspect the data
+str(RR_data)</code></pre>
+<pre><code>Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:   18 obs. of  20 variables:
+ $ study             : chr  &quot;Kongsved et al, 2007&quot; &quot;Mlikotic et al, 2016&quot; &quot;Sinclair et al, 2012&quot; &quot;Palmen et al,  2015&quot; ...
+ $ type              : chr  &quot;Paper Vs Web&quot; &quot;Paper Vs Web&quot; &quot;Paper Vs Web&quot; &quot;Paper Vs Web&quot; ...
+ $ year              : num  2007 2016 2012 2015 2014 ...
+ $ samples           : num  533 1192 26500 48 2316 ...
+ $ paper_surv        : num  76.5 57.7 9.2 88 67 78.3 57 87.2 62.3 42 ...
+ $ dig_survey        : num  64.2 31.1 2.8 33.3 64.7 87.4 41.9 86.2 30.9 42 ...
+ $ rr_diff           : num  12.3 26.6 6.4 54.7 2.3 ...
+ $ rr_var            : num  2.0216 0.4643 0.0025 0.5338 2.0464 ...
+ $ weight            : num  0.008543 0.019105 0.424727 0.000769 0.03712 ...
+ $ rr_weighted       : num  0.1051 0.5082 2.7183 0.0421 0.0854 ...
+ $ var_weighted      : num  0.01727 0.008871 0.001064 0.000411 0.07596 ...
+ $ paper_missing     : num  36.6 NA 0.4 NA NA 21.1 NA 12 NA NA ...
+ $ dig_missing       : num  2.2 NA 0 NA NA 10.1 NA 17 NA NA ...
+ $ miss_diff         : num  34.4 NA 0.4 NA NA 11 NA -5 NA NA ...
+ $ miss_var          : num  -2.16 NA 9.06e-06 NA NA ...
+ $ miss_diff_weighted: num  0.294 NA 0.17 NA NA ...
+ $ miss_var_weighted : num  -1.84e-02 NA 3.85e-06 NA NA ...
+ $ rand_assign       : chr  &quot;No&quot; &quot;No&quot; &quot;Yes&quot; &quot;Yes&quot; ...
+ $ incentives        : chr  &quot;No&quot; &quot;No&quot; &quot;Yes&quot; &quot;No&quot; ...
+ $ reminder          : chr  &quot;Yes&quot; &quot;No&quot; &quot;Yes&quot; &quot;Yes&quot; ...</code></pre>
+</div>
+<div id="label-some-of-the-categorical-data" class="section level2">
+<h2>Label some of the categorical data</h2>
+<pre class="r"><code># make lables for the incentive levels
+RR_data$incentives &lt;- factor(RR_data$incentives,
+levels = c(&quot;Yes&quot;, &quot;No&quot;),
+labels = c(&quot;With Incentives&quot;, &quot;Without Incentives&quot;))
+
+ # make labels for the reminder levels
+RR_data$reminder &lt;- factor(RR_data$reminder, 
+levels = c(&quot;Yes&quot;, &quot;No&quot;),
+labels = c(&quot;Reminded&quot;, &quot;Not Reminded&quot;))
+
+# make labels for random aissginment levels
+RR_data$rand_assign &lt;- factor(RR_data$rand_assign,
+levels = c(&quot;Yes&quot;, &quot;No&quot;),
+labels = c(&quot;Randomly Assigned&quot;, &quot;Not Randomly Assigned&quot;))</code></pre>
+</div>
+</div>
+<div id="random-effects-models" class="section level1">
+<h1>Random Effects Models</h1>
+<p>Here we will create effect size and sample variance for the model. After that we will input these variables into the model.</p>
+<div id="make-effect-size-variable" class="section level2">
+<h2>make effect size variable</h2>
+<pre class="r"><code># effect size 
+yi &lt;-  RR_data$rr_diff
+# sample varience 
+vi &lt;- RR_data$rr_var</code></pre>
+</div>
+<div id="build-random-effects-model-using-the-metagen-function" class="section level2">
+<h2>Build Random effects model using the metagen function</h2>
+<pre class="r"><code># RE Model
+RE_model&lt;-metagen(yi,
+              vi,
+              label.e = &quot;Paper Survey&quot;,
+              label.c = &quot;Digital Survey&quot;,
+              data=RR_data,
+              studlab=paste(study),
+              comb.fixed = F,
+              comb.random = TRUE,
+              hakn = TRUE,
+              prediction=F,
+              sm=&quot;SMD&quot;)</code></pre>
+</div>
+<div id="forest-plot" class="section level2">
+<h2>Forest Plot</h2>
+<p>We will now produce a forest plot using our RE model and then look at the statistical output of RE Model</p>
+<pre class="r"><code># forest plot 
+
+forest(RE_model,
+       xlim = c(-20,50),
+       rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
+       leftlabs = c(&quot;Author(s) and Year &quot;),
+       just.addcols.left = &quot;left&quot;,
+       rightcols=c(&quot;effect&quot;, &quot;ci&quot;),
+       pooled.totals = T,
+       label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
+       label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
+       smlab = &quot;&quot;,
+       col.by = &quot;black&quot;,
+       text.random = &quot;Overall effect&quot;,
+       print.tau2 = FALSE,
+       print.byvar =F,
+       calcwidth.hetstat = T,
+       col.diamond = &quot;blue&quot;,
+       col.diamond.lines = &quot;black&quot;,
+       digits.sd = 2,
+       print.I2 = TRUE,
+       print.Q = TRUE)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># RE Model ouput
+
+summary(RE_model)</code></pre>
+<pre><code>Number of studies combined: k = 18
+
+                         SMD            95%-CI    t p-value
+Random effects model 12.3021 [4.8043; 19.7999] 3.46  0.0030
+
+Quantifying heterogeneity:
+tau^2 = 313.7656; H = 31.99 [30.81; 33.22]; I^2 = 99.9% [99.9%; 99.9%]
+
+Test of heterogeneity:
+        Q d.f. p-value
+ 17397.98   17       0
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Hartung-Knapp adjustment for random effects model</code></pre>
+<p>Our model gives an overall weighted response rate difference of 12.30% (95% CI, 4.80 to 19.80), between paper and online surveys. However, the heterogeneity of the studies included was very significant with a Q score of 17,397 (I2 = 100%; p = 0.00). This substantial heterogeneity warrants further investigation.</p>
+</div>
+</div>
+<div id="between-study-heterogeneity" class="section level1">
+<h1>Between-study Heterogeneity</h1>
+<p>To detect influential studies that may be pushing the effect of our analysis into one direction. We applied Viechtbauer and Cheung’s (2010) method for detecting statistical outliers. This involved categorising studies whose confidence interval did not overlap with the overall effect confidence interval as outliers (Viechtbauer and Cheung, 2010).</p>
+<div id="detecting-outliers" class="section level2">
+<h2>Detecting outliers</h2>
+<p>In order to do this we must create an R package that aids us in spotting these outliers based on there confidence interval</p>
+<pre class="r"><code># Make a function to aid detection outliers
+spot.outliers.random&lt;-function(data){
+  data&lt;-data
+  Author&lt;-data$studlab
+  lowerci&lt;-data$lower
+  upperci&lt;-data$upper
+  m.outliers&lt;-data.frame(Author,lowerci,upperci)
+  te.lower&lt;-data$lower.random
+  te.upper&lt;-data$upper.random
+  dplyr::filter(m.outliers,upperci &lt; te.lower)
+  dplyr::filter(m.outliers,lowerci &gt; te.upper)
+}
+
+# apply outlier function to our RE model 
+spot.outliers.random(data=RE_model)</code></pre>
+<pre><code>                Author  lowerci  upperci
+1 Mlikotic et al, 2016 25.68991 27.51009
+2  Palmen et al,  2015 53.65379 55.74621
+3       Le et al, 2018 30.50266 32.29734
+4  Kallmen et al, 2011 26.75652 28.04348</code></pre>
+<p>Based on our outlier function, four studies stand out greatly as their lower-bound CI is greater than the upper bound CI of our pooled effect size. These studies are Mlikotic et al, 2016, Palmen et al, 2015, Le et al, 2018 and Kallmen et al, 2011.</p>
+</div>
+<div id="influence-analysis" class="section level2">
+<h2>Influence analysis</h2>
+<p>To analyse the individual impact on heterogeneity, each study was removed from the meta-analysis one at a time, and the individual influence on I2 was estimated. In addition, to this a diagnostic plot called Baujat plot (ref) inspecting overall heterogeneity was conducted. Baujat plot assess the contribution of each study by overall heterogeneity as measured by Cochran’s Q, and its influence on the pooled effect size on the vertical axis.</p>
+<pre class="r"><code># make an influence function 
+
+influence.analysis&lt;-function(data, method.tau, hakn){
+  
+  influence.data&lt;-data
+  TE&lt;-data$TE
+  seTE&lt;-data$seTE
+  method.tau&lt;-method.tau
+  hakn&lt;-hakn
+  
+  if(hakn == TRUE){
+    res &lt;- rma(yi=TE, sei=seTE, measure=&quot;ZCOR&quot;, 
+               data=influence.data, 
+               method = paste(method.tau),
+               test=&quot;knha&quot;)
+    res
+    inf &lt;- influence(res)
+    influence.data&lt;-metainf(data)
+    influence.data$I2&lt;-format(round(influence.data$I2,2),nsmall=2)
+    plot(inf)
+    baujat(data,  yscale=10, xmin=10, ymin=1,
+       pos=2, xlim=c(-1500, 4200), cex.studlab = 0.8)
+    forest(influence.data,
+           sortvar=I2,
+           rightcols = c(&quot;TE&quot;,&quot;ci&quot;,&quot;I2&quot;),
+           smlab = &quot;Sorted by I-squared&quot;)
+    forest(influence.data,
+           sortvar=TE,
+           rightcols = c(&quot;TE&quot;,&quot;ci&quot;,&quot;I2&quot;),
+           smlab = &quot;Sorted by Effect size&quot;)
+    
+  } else {
+    
+    res &lt;- rma(yi=TE, sei=seTE, measure=&quot;ZCOR&quot;, 
+               data=influence.data, 
+               method = paste(method.tau))
+    res
+    inf &lt;- influence(res)
+    influence.data&lt;-metainf(data)
+    influence.data$I2&lt;-format(round(influence.data$I2,2),nsmall=2)
+    plot(inf,  yscale=10, xmin=10, ymin=1,
+       pos=2, xlim=c(1500, 4200), cex.studlab = 0.8)
+    baujat(data, pch = 10)
+    forest(influence.data,
+           sortvar=I2,
+           rightcols = c(&quot;TE&quot;,&quot;ci&quot;,&quot;I2&quot;),
+           smlab = &quot;Sorted by I-squared&quot;)
+    forest(influence.data,
+           sortvar=TE,
+           rightcols = c(&quot;TE&quot;,&quot;ci&quot;,&quot;I2&quot;),
+           smlab = &quot;Sorted by Effect size&quot;)
+  }}  
+
+influence.analysis(data=RE_model,method.tau = &quot;SJ&quot;, hakn = TRUE)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-3.png" width="672" style="display: block; margin: auto;" /><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-4.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Based on our Baujat and influential analysis, five studies appear to stand out greatly, four of which we already have come across in our initial outlier analysis.</p>
+<p>Mlikotic et al, 2016, Sinclair et al, 2012 Palmen et al, 2015, Le et al, 2018 and Kallmen et al, 2011.</p>
+</div>
+<div id="sensitivity-analysis" class="section level2">
+<h2>Sensitivity analysis</h2>
+<p>We will now conduct a sensitivity analysis in which the five identified outlier studies are excluded.</p>
+<pre class="r"><code># remove outliers
+
+RE.model.outliers&lt;-update.meta(RE_model,
+                           subset = -c(2,3,4,9,15))
+
+
+# re-run forest plot 
+
+forest(RE.model.outliers,
+       xlim = c(-20,60),
+       rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
+       leftlabs = c(&quot;Author(s) and Year &quot;),
+       just.addcols.left = &quot;left&quot;,
+       rightcols=c(&quot;effect&quot;, &quot;ci&quot;),
+       pooled.totals = T,
+       label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
+       label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
+       smlab = &quot;&quot;,
+       col.by = &quot;black&quot;,
+       text.random = &quot;Overall effect&quot;,
+       print.tau2 = FALSE,
+       print.byvar =F,
+       calcwidth.hetstat = T,
+       col.diamond = &quot;blue&quot;,
+       col.diamond.lines = &quot;black&quot;,
+       digits.sd = 2,
+       print.I2 = TRUE,
+       print.Q = TRUE)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># RE Model ouput
+
+summary(RE.model.outliers)</code></pre>
+<pre><code>Number of studies combined: k = 13
+
+                        SMD            95%-CI    t p-value
+Random effects model 5.9075 [1.5899; 10.2250] 2.98  0.0115
+
+Quantifying heterogeneity:
+tau^2 = 49.4838; H = 4.47 [3.77; 5.31]; I^2 = 95.0% [92.9%; 96.5%]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 239.85   12 &lt; 0.0001
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Hartung-Knapp adjustment for random effects model</code></pre>
+<p>Subsequent to the removal of the five outlier studies, the Q score of went down to 239.85 (I2 = 95%; p = 0.0001). That is a drastic drop from the previous Q score which was 17, 397. This further confirms that the outliers were considerably adding to the studies heterogeneity.</p>
+<p>In addition to this, the new updated model has an effect size of 5.9% and a 95% confidence interval between 3.77 and 5.31; this confidence interval is much narrower than the confidence interval of the previous interval, suggesting that the previous studies were inflating the effect size.</p>
+</div>
+</div>
+<div id="subgroup-analysis" class="section level1">
+<h1>Subgroup analysis</h1>
+<p>Now we want to know study specfic features and effects on our meta-analysis. In order to do this we will do subgroup analysis.</p>
+<div id="type-of-surveys" class="section level2">
+<h2>Type of surveys</h2>
+<p>Analysis looking at whether the type of study comparisons has impact on the effect size</p>
+<pre class="r"><code># build a REM for between-subgroup-differences in random assignments
+type.subgroup&lt;-update.meta(RE.model.outliers, 
+                             byvar = RR_data$type, 
+                             comb.random = TRUE, 
+                             comb.fixed = FALSE)
+
+# forest plot of sub-group RE Model
+
+forest(type.subgroup,
+       xlim = c(-20,30),
+       rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
+       leftlabs = c(&quot;Author(s) and Year &quot;),
+       just.addcols.left = &quot;left&quot;,
+       rightcols=c(&quot;effect&quot;, &quot;ci&quot;),
+       pooled.totals = T,
+       label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
+       label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
+       smlab = &quot;&quot;,
+       col.by = &quot;black&quot;,
+       text.random = &quot;Overall effect&quot;,
+       print.tau2 = FALSE,
+       print.byvar =F,
+       fs.test.subgroup = 3,
+       calcwidth.hetstat = T,
+       calcwidth.tests = T,
+       col.diamond = &quot; dark blue&quot;,
+       col.diamond.lines = &quot;black&quot;,
+       digits.sd = 2,
+       print.I2 = TRUE,
+       print.Q = TRUE)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># RE Model ouput
+
+summary(type.subgroup)</code></pre>
+<pre><code>Number of studies combined: k = 13
+
+                        SMD            95%-CI    t p-value
+Random effects model 5.9075 [1.5899; 10.2250] 2.98  0.0115
+
+Quantifying heterogeneity:
+tau^2 = 49.4838; H = 4.47 [3.77; 5.31]; I^2 = 95.0% [92.9%; 96.5%]
+
+Quantifying residual heterogeneity:
+H = 4.58 [3.84; 5.47]; I^2 = 95.2% [93.2%; 96.7%]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 239.85   12 &lt; 0.0001
+
+Results for subgroups (random effects model):
+                      k     SMD             95%-CI      Q   tau^2   I^2
+type = Paper Vs Web  12  5.1429 [ 0.7754;  9.5104] 231.11 49.5912 95.2%
+type = Paper Vs SMS   1 15.2000 [10.0632; 20.3368]   0.00      --    --
+
+Test for subgroup differences (random effects model):
+                    Q d.f. p-value
+Between groups   9.36    1  0.0022
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Hartung-Knapp adjustment for random effects model</code></pre>
+<p>Our surveys have various different features. One othe features</p>
+</div>
+<div id="random-assignment" class="section level2">
+<h2>Random assignment</h2>
+<pre class="r"><code># build a REM for between-subgroup-differences in random assignments
+rand.subgroup&lt;-update.meta(RE.model.outliers, 
+                             byvar=rand_assign, 
+                             comb.random = TRUE, 
+                             comb.fixed = FALSE)
+
+RR_data$rand_assign</code></pre>
+<pre><code> [1] Not Randomly Assigned Not Randomly Assigned Randomly Assigned    
+ [4] Randomly Assigned     Not Randomly Assigned Not Randomly Assigned
+ [7] Randomly Assigned     Randomly Assigned     Randomly Assigned    
+[10] Randomly Assigned     Not Randomly Assigned Randomly Assigned    
+[13] Randomly Assigned     Randomly Assigned     Randomly Assigned    
+[16] Randomly Assigned     Not Randomly Assigned Randomly Assigned    
+Levels: Randomly Assigned Not Randomly Assigned</code></pre>
+<pre class="r"><code># forest plot of sub-group RE Model
+
+forest(rand.subgroup,
+       xlim = c(-20,30),
+       rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
+       leftlabs = c(&quot;Author(s) and Year &quot;),
+       just.addcols.left = &quot;left&quot;,
+       rightcols=c(&quot;effect&quot;, &quot;ci&quot;),
+       pooled.totals = T,
+       label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
+       label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
+       smlab = &quot;&quot;,
+       col.by = &quot;black&quot;,
+       text.random = &quot;Overall effect&quot;,
+       print.tau2 = FALSE,
+       print.byvar =F,
+       calcwidth.hetstat = T,
+        calcwidth.tests = T,
+       col.diamond = &quot;blue&quot;,
+       col.diamond.lines = &quot;black&quot;,
+       digits.sd = 2,
+       print.I2 = TRUE,
+       print.Q = TRUE)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># RE Model ouput
+
+summary(rand.subgroup)</code></pre>
+<pre><code>Number of studies combined: k = 13
+
+                        SMD            95%-CI    t p-value
+Random effects model 5.9075 [1.5899; 10.2250] 2.98  0.0115
+
+Quantifying heterogeneity:
+tau^2 = 49.4838; H = 4.47 [3.77; 5.31]; I^2 = 95.0% [92.9%; 96.5%]
+
+Quantifying residual heterogeneity:
+H = 4.64 [3.90; 5.53]; I^2 = 95.4% [93.4%; 96.7%]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 239.85   12 &lt; 0.0001
+
+Results for subgroups (random effects model):
+                                      k    SMD             95%-CI      Q
+rand_assign = Randomly Assigned       8 7.5010 [ 2.0332; 12.9689] 204.06
+rand_assign = Not Randomly Assigned   5 3.3750 [-6.5332; 13.2831]  33.12
+                                      tau^2   I^2
+rand_assign = Randomly Assigned     60.1574 96.6%
+rand_assign = Not Randomly Assigned 36.2554 87.9%
+
+Test for subgroup differences (random effects model):
+                    Q d.f. p-value
+Between groups   0.94    1  0.3319
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Hartung-Knapp adjustment for random effects model</code></pre>
+</div>
+<div id="incentives" class="section level2">
+<h2>Incentives</h2>
+<pre class="r"><code># build a REM for between-subgroup-differences in random assignments
+incent.subgroup&lt;-update.meta(RE.model.outliers, 
+                             byvar=incentives, 
+                             comb.random = TRUE, 
+                             comb.fixed = FALSE)
+
+# forest plot of sub-group RE Model
+
+forest(incent.subgroup,
+       xlim = c(-20,30),
+      rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
+       leftlabs = c(&quot;Author(s) and Year &quot;),
+       just.addcols.left = &quot;left&quot;,
+       rightcols=c(&quot;effect&quot;, &quot;ci&quot;),
+       pooled.totals = T,
+       label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
+       label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
+       smlab = &quot;&quot;,
+       col.by = &quot;black&quot;,
+       text.random = &quot;Overall effect&quot;,
+       print.tau2 = FALSE,
+       print.byvar =F,
+      calcwidth.hetstat = T,
+       col.diamond = &quot;blue&quot;,
+       col.diamond.lines = &quot;black&quot;,
+       digits.sd = 2,
+       print.I2 = TRUE,
+       print.Q = TRUE)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># RE Model ouput
+
+summary(incent.subgroup)</code></pre>
+<pre><code>Number of studies combined: k = 13
+
+                        SMD            95%-CI    t p-value
+Random effects model 5.9075 [1.5899; 10.2250] 2.98  0.0115
+
+Quantifying heterogeneity:
+tau^2 = 49.4838; H = 4.47 [3.77; 5.31]; I^2 = 95.0% [92.9%; 96.5%]
+
+Quantifying residual heterogeneity:
+H = 4.12 [3.41; 4.97]; I^2 = 94.1% [91.4%; 96.0%]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 239.85   12 &lt; 0.0001
+
+Results for subgroups (random effects model):
+                                  k    SMD             95%-CI      Q
+incentives = With Incentives      5 2.2865 [-8.6706; 13.2436]  70.08
+incentives = Without Incentives   8 7.6550 [ 2.8949; 12.4151] 116.60
+                                   tau^2   I^2
+incentives = With Incentives    124.0739 94.3%
+incentives = Without Incentives  36.1493 94.0%
+
+Test for subgroup differences (random effects model):
+                    Q d.f. p-value
+Between groups   1.47    1  0.2256
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Hartung-Knapp adjustment for random effects model</code></pre>
+</div>
+<div id="reminder" class="section level2">
+<h2>Reminder</h2>
+<pre class="r"><code># build a REM for between-subgroup-differences in random assignments
+remin.subgroup&lt;-update.meta(RE.model.outliers, 
+                             byvar=reminder,
+                           bylab =  c(&quot;With Incentives&quot;, &quot;Without incentives&quot;),
+                             comb.random = TRUE, 
+                             comb.fixed = FALSE)
+
+# forest plot of sub-group RE Model
+
+forest(remin.subgroup,
+       xlim = c(-20,30),
+       label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
+       label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
+       smlab = &quot;&quot;,
+       col.by = &quot;black&quot;,
+       text.random = &quot;Overall effect&quot;,
+       print.tau2 = FALSE,
+       print.byvar =F,
+       calcwidth.hetstat = T,
+       col.diamond = &quot;blue&quot;,
+       col.diamond.lines = &quot;black&quot;,
+       digits.sd = 2,
+       print.I2 = TRUE,
+       print.Q = TRUE)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># RE Model ouput
+
+summary(remin.subgroup)</code></pre>
+<pre><code>Number of studies combined: k = 13
+
+                        SMD            95%-CI    t p-value
+Random effects model 5.9075 [1.5899; 10.2250] 2.98  0.0115
+
+Quantifying heterogeneity:
+tau^2 = 49.4838; H = 4.47 [3.77; 5.31]; I^2 = 95.0% [92.9%; 96.5%]
+
+Quantifying residual heterogeneity:
+H = 3.62 [2.95; 4.43]; I^2 = 92.4% [88.5%; 94.9%]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 239.85   12 &lt; 0.0001
+
+Results for subgroups (random effects model):
+                                    k    SMD             95%-CI      Q
+With Incentives = Reminded          9 7.4705 [ 1.4530; 13.4880] 118.77
+Without incentives = Not Reminded   4 2.5547 [-3.8179;  8.9272]  25.04
+                                    tau^2   I^2
+With Incentives = Reminded        42.1454 93.3%
+Without incentives = Not Reminded 21.8240 88.0%
+
+Test for subgroup differences (random effects model):
+                    Q d.f. p-value
+Between groups   2.23    1  0.1350
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Hartung-Knapp adjustment for random effects model</code></pre>
+</div>
+<div id="year" class="section level2">
+<h2>Year</h2>
+<p>Here will use metaregression to really see if publication year impacts our effect size</p>
+<pre class="r"><code>year.metareg&lt;-metareg(RE.model.outliers, year)
+year.metareg</code></pre>
+<pre><code>
+Mixed-Effects Model (k = 13; tau^2 estimator: DL)
+
+tau^2 (estimated amount of residual heterogeneity):     53.3806 (SE = 34.4554)
+tau (square root of estimated tau^2 value):             7.3062
+I^2 (residual heterogeneity / unaccounted variability): 94.87%
+H^2 (unaccounted variability / sampling variability):   19.50
+R^2 (amount of heterogeneity accounted for):            0.00%
+
+Test for Residual Heterogeneity: 
+QE(df = 11) = 214.5499, p-val &lt; .0001
+
+Test of Moderators (coefficient(s) 2): 
+F(df1 = 1, df2 = 11) = 1.8329, p-val = 0.2029
+
+Model Results:
+
+          estimate        se     tval    pval      ci.lb      ci.ub   
+intrcpt  1105.8114  812.4445   1.3611  0.2007  -682.3668  2893.9897   
+year       -0.5470    0.4041  -1.3538  0.2029    -1.4364     0.3423   
+
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 </code></pre>
+<pre class="r"><code>bubble(year.metareg,
+       ylim = c(-20, 20),
+       xlim = c(1998, 2020),
+       
+       xlab = &quot;Publication Year&quot;,
+       col.line = &quot;blue&quot;,
+       studlab = F)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="publication-bias" class="section level1">
+<h1>Publication bias</h1>
+<div id="funnel-plot" class="section level2">
+<h2>Funnel plot</h2>
+<p>Here will see if our results are impacted by publication</p>
+<pre class="r"><code>funnel(RE.model.outliers, xlab=&quot;Hedges&#39; g&quot;, studlab = T)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We can see that some studies appear to fall outside of teh funnel, implying that there is a high likelyhood of publication bias within our pool of studies.</p>
+</div>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.2 (2018-12-20)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS Mojave 10.14
+
+Matrix products: default
+BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] bindrcpp_0.2.2  dplyr_0.7.8     metafor_2.0-0   Matrix_1.2-15  
+[5] meta_4.9-4      readxl_1.1.0    prettydoc_0.2.1
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.0        bindr_0.1.1       knitr_1.21       
+ [4] whisker_0.3-2     magrittr_1.5      workflowr_1.1.1  
+ [7] tidyselect_0.2.5  lattice_0.20-38   R6_2.3.0         
+[10] rlang_0.3.0.1     stringr_1.3.1     tools_3.5.2      
+[13] grid_3.5.2        nlme_3.1-137      xfun_0.4         
+[16] R.oo_1.22.0       git2r_0.23.0      htmltools_0.3.6  
+[19] assertthat_0.2.0  yaml_2.2.0        digest_0.6.18    
+[22] rprojroot_1.3-2   tibble_1.4.2      crayon_1.3.4     
+[25] purrr_0.2.5       R.utils_2.7.0     glue_1.3.0       
+[28] evaluate_0.12     rmarkdown_1.11    stringi_1.2.4    
+[31] pillar_1.3.0      compiler_3.5.2    cellranger_1.1.0 
+[34] backports_1.1.2   R.methodsS3_1.7.1 pkgconfig_2.0.2  </code></pre>
+</div>
+</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>
+  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+  analysis was created with
+  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
+</p>
+<hr>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+author,year,,pop,samp_size,weight,paper_rr,web_rr,rr_diff,weighted_rr_diff,rr_var,rr_var_weighted,paper_missing,web_missing,miss_diff,Weighted miss diff,Miss_var,weighted_miss_var,random_assignment,incentives,reminder
+Kongsved et al,2007,Paper Vs Web,Breast Cancer Population,533,0.034626129,76.5,64.2,12.3,0.425901384,6.2396E-05,2.16053E-06,36.6,2.2,34.4,1.191138829,0.020584719,0.000712769,No,No,Yes
+Mlikotic et al,2016,Paper Vs Web,Breast Cancer Population,1192,0.077437796,57.7,31.1,26.6,2.059845384,0.015168815,0.00117464,,,,,,,No,No,No
+Palmen et al,2015,Paper Vs Web,Post-surgery Population ,48,0.003118301,88,33.3,54.7,0.170571039,0.122259901,0.000381243,,,,,,,Yes,No,Yes
+Bojcic et al,2014,Paper Vs Web,Post-surgery Population ,2316,0.150458,67,64.7,2.3,0.346053401,0.005285889,0.000795304,,,,,,,No,No,Yes
+Hagan et al,2017,Paper Vs Web,Breast Cancer Population,382,0.024816475,78.3,87.4,-9.1,-0.225829923,0.027090463,0.00067229,21.1,10.1,11,0.272981225,0.002037422,5.05616E-05,No,Yes,Yes
+Fekete et al,2015,Paper Vs Web,Mixed Population,1549,0.100630157,57,41.9,15.1,1.519515364,0.0009283,9.3415E-05,,,,,,,Yes,Yes,Yes
+Schwartzenberger et al,2017,Paper Vs Web,Post-surgery Population ,646,0.041967128,42,42,0,0,0.00832526,0.000349387,,,,,,,Yes,No,No
+McCabe et al,2005,Paper Vs Web,Student Population,323,0.020983564,87.2,86.2,1,0.020983564,0.006919335,0.000145192,12,17,-5,-0.10491782,0.03031185,0.000636051,Yes,Yes,No
+Callas et al,2010,Paper Vs Web,Mixed Population,697,0.045280322,92,92,0,0,0.00832526,0.00037697,2.3,1.7,0.6,0.027168193,0.016632017,0.000753103,No,Yes,No
+McCormack et al,2013,Paper Vs Web,,73,0.004742415,84.0,81.0,3.0,0.014227246,0.004497297,2.13281E-05,52,10,42,0.199181446,0.041915281,0.00019878,Yes,Yes,Yes
+Howu et al,2013,Paper Vs Web,,1576,0.102384201,56.1,53.3,2.8,0.286675762,0.004716112,0.000482855,,,,,,,Yes,No,Yes
+Lagerros et al ,2011,Paper Vs Web,,425,0.0276100,88.3,79.8,8.5,0.234684597,0.000516658,1.42649E-05,,,,,,,Yes,No,Yes
+*Lagerros et al ,2011,Paper Vs SMS,,422,0.027415059,88.3,73.1,15.2,0.416708894,0.000978067,2.68138E-05,,,,,,,Yes,No,Yes
+Kallmen et al,2011,Paper Vs Web,,2472,0.160592477,53.6,26.2,27.4,4.400233873,0.016798753,0.002697753,,,,,,,Yes,Yes,Yes
+Balter et al,2005,Paper Vs Web,,585,0.038004288,64.4,50.9,13.5,0.513057883,0.000308758,1.17341E-05,,,,,,,Yes,No,Yes
+Andersson et al,2002,Paper Vs Web,,2154,0.139933736,59.7,51.9,7.8,1.091483142,0.00080499,0.000112645,,,,,,,No,No,No

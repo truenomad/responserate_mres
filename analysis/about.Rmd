@@ -1,0 +1,9 @@
+---
+title: "About"
+output:
+  workflowr::wflow_html:
+    toc: false
+---
+
+I am a research assistant and a post-graduate student at Manchester Metropolitan University.
+My work is around the epidemiology of musculoskeletal conditions.
