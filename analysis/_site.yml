@@ -3,7 +3,8 @@ output_dir: "../docs"
 navbar:
   title: "Response Rate Met-analysis"
   left:
-    - text: "Home"
+    - text: "Workflow"
+      href: "RR_Meta-analysis.html"
       href: index.html
     - text: "About"
       href: about.html
@@ -11,7 +12,7 @@ navbar:
       href: license.html
   right:
     - icon: fa-github
-      href: https://github.com/jdblischak/workflowr
+      href: https://truenomad.github.io/responserate_mres/
 output:
   workflowr::wflow_html:
     toc: true
