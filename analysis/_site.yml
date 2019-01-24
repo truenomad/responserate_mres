@@ -12,6 +12,7 @@ navbar:
     - text: "index"
       href: index.html
 
+
   right:
     - icon: fa-github
       href: https://truenomad.github.io/responserate_mres/
