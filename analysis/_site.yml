@@ -4,7 +4,7 @@ navbar:
   title: "Response Rate Met-analysis"
   left:
     - text: "Workflow"
-      href: RR_Meta-analysis.html
+      href: RR_Meta-analysis.wflow_html
     - text: "About"
       href: about.html
     - text: "License"

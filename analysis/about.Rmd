@@ -5,5 +5,7 @@ output:
     toc: false
 ---
 
+Welcome to my website for my MRes thesis data analysis. This is where all of my data, script and results will be shared.
+
 I am a research assistant and a post-graduate student at Manchester Metropolitan University.
-My work is around the epidemiology of musculoskeletal conditions.
+My work is around the epidemiology of musculoskeletal conditions. 
