@@ -9,6 +9,9 @@ navbar:
       href: about.html
     - text: "License"
       href: license.html
+    - text: "index"
+      href: index.html
+
   right:
     - icon: fa-github
       href: https://truenomad.github.io/responserate_mres/
