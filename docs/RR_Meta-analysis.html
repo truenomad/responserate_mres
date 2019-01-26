@@ -16,18 +16,13 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -108,93 +103,6 @@ summary {
 </style>
 
 
-<style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script>
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark it active
-  menuAnchor.parent().addClass('active');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
-});
-</script>
 
 <div class="container-fluid main-container">
 
@@ -270,136 +178,7 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
 
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Response Rate Met-analysis</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/jdblischak/workflowr">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
 
 <!-- Add a small amount of space between sections. -->
 <style type="text/css">
@@ -419,7 +198,7 @@ div.section {
 </div>
 
 
-<p><strong>Last updated:</strong> 2019-01-23</p>
+<p><strong>Last updated:</strong> 2019-01-26</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -443,19 +222,22 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/truenomad/responserate_mres/tree/7c0ba6fb99a8bfdf2aa93c414d92b88160b7560e" target="_blank">7c0ba6f</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/truenomad/responserate_mres/tree/4095fd3752eec910ddbc8b842b11c9aa37edf016" target="_blank">4095fd3</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
     Ignored:    .DS_Store
+    Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.DS_Store
-    Ignored:    mohamedyusuf/
+    Ignored:    docs/.DS_Store
+    Ignored:    docs/figure/.DS_Store
     Ignored:    output/.DS_Store
 
 Unstaged changes:
-    Modified:   Responserate_mres.Rproj
+    Modified:   _workflowr.yml
+    Modified:   analysis/_site.yml
 
 </code></pre>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
@@ -484,6 +266,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/truenomad/responserate_mres/blob/4095fd3752eec910ddbc8b842b11c9aa37edf016/analysis/RR_Meta-analysis.Rmd" target="_blank">4095fd3</a>
+</td>
+<td style="text-align:left;">
+truenomad
+</td>
+<td style="text-align:left;">
+2019-01-26
+</td>
+<td style="text-align:left;">
+wflow_publish(“analysis/RR_Meta-analysis.Rmd”)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/truenomad/responserate_mres/f2f2a15d2557402d34effc80f6f6a84e6708b3c5/docs/RR_Meta-analysis.html" target="_blank">f2f2a15</a>
+</td>
+<td style="text-align:left;">
+truenomad
+</td>
+<td style="text-align:left;">
+2019-01-23
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 html
@@ -557,49 +373,263 @@ First commit
 </ul>
 <p></details></p>
 <hr />
-<div id="get-data-into-r" class="section level1">
-<h1>Get data into R</h1>
-<p>Here we will install and run all the relelvant packages as well upload our data.</p>
-<div id="install-dependencies" class="section level2">
-<h2>Install dependencies</h2>
+<style>
+body {
+text-align: justify}
+</style>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<div id="background" class="section level3">
+<h3>Background</h3>
+<p>Over the past few decades, due to their constant evolution and ubiquitousness, there has been an upsurge in the use of internet-based communications (Gernsbacher, 2014). The advancement and preferential gap between the traditional forms of communication (face-to-face, telephones, pen and paper etc.,) and those which utilise the internet (social media, mobile phones, computers etc.,) is growing further every day (Immonen and Sintonen, 2015). The internet has become a widespread information infrastructure that has reduced the distance and time between people; it has revolutionised the way in which people communicate and process information (Friedman, 2006). Recently, epidemiologists have started adopting the internet as a platform for data collection. Examples of successful implementation of internet-based surveys to collect large-scale population-based data are the occupational and environmental health prospective cohort study in the Netherlands (Slottje et al., 2014), the Nurses and Midwives e-Cohort Study (Turner et al., 2008) and the medication use in pregnancy cross-sectional study (Lupattelli et al., 2014).</p>
+<p>Internet-based surveys have various advantages over the more traditional methods of data collection, features that make it the ideal platform for gathering population-based data in epidemiological studies (Van Gelder et al., 2010; Ekman and Litton, 2007; Wright, 2005). In terms of survey distribution and completion, they have a quick turnaround (Kroth et al., 2009; Akl et al., 2005). In large-scale epidemiological scenarios, internet-based surveys are cost-effective as costs for printing, distribution, data scoring and data digitisation are avoided (Ebert et al., 2018). However, in small-scale scenarios, the use of internet-based surveys may not be cost-effective; the costs to set-up the online survey may be higher than the costs to set up other more traditional data collection methods such as paper or telephone-based surveys (Griffis et al., 2003). Moreover, internet-based surveys have the ability to reach large populations that are geographically dispersed, and populations that are underrepresented and difficult to reach. For example, due to its anonymity, the internet is the ideal platform for collecting sensitive data from those in the lesbian, gay, bisexual and transgender (LGBT) communities (Mathy et al., 2002), and those in the drug users community (Duncan et al., 2003).</p>
+<p>Conversely, internet-based surveys have their own set of risks (Dillman, 2011). Due to the digital divide, internet-based surveys have a potential for selection bias (Brodie et al., 2000). The digital divide is a term used to describe the dichotomy between those who have access and knowledge of information technologies, such as the internet, (the “haves”) from those who do not (the “have nots”). The “have nots” make up a good portion of the population, this includes those in rural settings, those with low socioeconomic status, the elderly, the illiterate, the computer-illiterate, and those with physical and psychological barriers (Chang et al., 2004). If an internet-based survey is researching these special populations (the “have nots”), or if it is trying to get a general population-wide response, then it is vital researchers find ways of mitigating the presence of the digital divide, otherwise there is a potential for systematic bias that will limit the comparability of the responders as well as hinder the generalisability of the study findings (Guidry, 2014; Couper, 2000).</p>
+<p>Response rate is a measure of quantifying the degree of success in survey response. It is calculated as the total of number of respondents to a survey divided by the total number of samples in the survey (Armstrong et al., 1994). Low response rates in specific subgroups are of concern when the nonresponse is non-random; this is if those who do not respond may be systematically different from those who do respond on the key indicators that the survey was designed to study (Armstrong et al., 1994). If response rate drops beyond the anticipated level, then nonresponse bias could lead to a reduction in sample size, thus hampering study power and inflating the margin of standard error. Additionally, nonresponse bias could limit the generalisability of the study findings if the samples captured through the survey systematically differ from those in the target population. As the process leading to nonresponse can be varied and difficult to pinpoint, a general heuristic is that when the response rate is high then the occurrence of serious nonresponse bias is minimal. Thus, response rate is considered as a key measure for judging the quality of a survey (Hox and De Leeuw, 1994).</p>
+<p>There have been numerous meta-analytic studies to address the concern regarding the response rate difference between internet and paper-based surveys. Cook et al. (2000) conducted a meta-analysis looking at the response rate of internet surveys, while three other reviews looked at the response rates of paper surveys (Church, 1993; Yammarino et al., 1991; Fox et al., 1988). Two meta-analytic studies compared the response rate between internet-based surveys and paper-based surveys (Shih and Fan, 2008; Manfreda et al., 2008), overall, both meta-analyses found the response rate of internet surveys to be around 10-11% lower than paper-based surveys. As introduced by Fan and Yan (2010), the internet survey process is broken down into four stages, it is likely that response rate differences could potentially arise within any of these steps. The first stage is the survey development, within this step the content and the design and presentation play an in important role in the survey response. The second stage is the survey delivery, here various aspects such as sampling methods, contact delivery modes, the design of survey notification and incentives contribute to uptake of the survey. In the third stage, the individual’s willingness to participate in the survey has an impact on the survey completion, this includes various economic, social and psychological factors such as technological availability, technological competency, attitude and perception towards technology, attitude towards surveys and individual personality traits. In the final stage, technical and logistical failures can hinder the safe return of survey, thus affecting the response rate. In their meta-analysis, Shih and Fan (2008) have found study features including population types and follow-up reminders to explain some of the response rate variances between paper-based surveys and internet-based surveys.</p>
+<p>The reviews conducted by Shih and Fan (2008) and Manfreda et al. (2008) evaluated the literature up to 2006 and have all been carried out more than ten years ago. They do not reflect technological advancement, as there are now digital platforms that can incorporate face-to-face delivery as well as remote, for example, mobile apps such as Skype; these technology’s allow face-to-face data collection for individuals as well as groups, overcoming barriers that riddle onsite data collection, barriers such as geographical limitations, time and financial constraints, and physical mobility boundaries (Janghorban et al., 2014). Furthermore, the reviews do not take into account the new emerging population that is often referred to as the digital natives; these are individuals who have grown up in the digital age (Prensky, 2001). In addition to this, the reviews broadly look at comparative studies from a spectrum of disciplines including education, business, psychology, social science and medicine. There are not any reviews specifically looking at the response rate in surveys used to collect data within epidemiological studies.</p>
+<p>Epidemiological studies are used to provide population-based information on the distribution and the determinants of health or disease outcomes within a specific population (Rothman et al., 2008). In recent decades, there has been a decline in survey response rate within population-based studies (Pirus et al., 2010). In all epidemiological study designs (Howe et al., 2013), low levels of response can affect the power of the study. If the low levels of response rate affect different groups of the studied population, then overall nonresponse can lead to selection bias and thus compromise the generalisability of the study findings, because of a lack of representativeness of the target population within the captured sample (Rothman et al., 2008).</p>
+<p>Further, within longitudinal study designs, where there is a follow-up survey (i.e., incidence or cohort studies), there is potential for attrition as some participants may be lost over time due to various reasons, such as refusing to participate and failing to be located or contacted (Ferrie et al., 2009). Again, compromised both the internal validity through reducing study power and external validity if this attrition is different in different subgroups of the population.</p>
+<p>In studies in which groups are being compared, there is also potential for differences in non-response between study groups e.g., in exposure groups in a cohort study. If this is substantial it may introduce bias as those who respond are likely to have different characteristics to those who do not, leading to a lack of comparability between the two study groups (Altman and Bland, 2007).</p>
+<p>This study is a systematic review investigating response rate differences between questionnaires administered by paper-based and those administered using digital platforms to collect exposure and/or outcome data in epidemiological studies, and the response rates difference between the different types of digital platforms (web, app, mobile, laptop computer or a tablet questionnaires).</p>
+</div>
+<div id="objectives" class="section level3">
+<h3>Objectives</h3>
+<p>First, we will estimate differences in response rates between the different types of self-administered survey methods. To explore this, we will investigate the following questions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Do response rates differ between paper-based surveys and the different types of digital survey methods (surveys on web, app, mobile, laptop computer or a tablet)?</p></li>
+<li><p>Do response rates differ between the different types of digital survey methods?</p></li>
+</ol>
+<p>Second, we will look at the impact of survey administration on response rate. It has previously been suggested that differences in survey administration could account for the response rate difference, as surveys that are administered fact-to-face often yield higher response rates than non-face-to-face surveys (Nulty, 2008). Thus, we will investigate the question:</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Does response rate difference change due to the mode of survey administration (i.e. face-to-face, or via mail/e-mail) for paper-based surveys?</p></li>
+<li><p>Does response rate difference change due to the mode of survey administration (i.e. face-to-face, or via mail/e-mail) for digital surveys?</p></li>
+</ol>
+<p>Third, as survey reminders and the type of population surveyed account for response rate variation between the different survey methods (Shih and Fan, 2008), we will investigate the questions:</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Do survey reminders account for response rates difference between paper-based and digital surveys?</p></li>
+<li><p>Do survey reminders account for response rates difference between the different types of digital surveys?</p></li>
+<li><p>Does population type account for response rates difference between paper-based and digital surveys?</p></li>
+<li><p>Does population type account for response rates difference between the different types of digital surveys?</p></li>
+<li><p>Are there differences between population subgroups in paper-based and digital surveys?</p></li>
+</ol>
+<p>Lastly, we will look at the quality of responses between the different types of surveys. In a randomised study comparing an internet and a paper-based version of the same survey, Kongsved et al (2007) found internet-based surveys to be 34% higher in data completeness (individual item response rate) than paper-based surveys. As such, we hypothesise that digital surveys, due to their quality-control features, have minimal missing data, and therefore, better data quality. To assess missingness, we will investigate the following questions:</p>
+<ol start="10" style="list-style-type: decimal">
+<li><p>Does individual item completeness/missing data (data quality) differ between paper-based and digital surveys?</p></li>
+<li><p>Does individual item completeness/missing data (data quality) differ between the different types of digital surveys?</p></li>
+</ol>
+</div>
+</div>
+<div id="methods" class="section level2">
+<h2>Methods</h2>
+<p>This review was carried out using the Preferred Reporting Items for Systematic reviews and Meta-Analyses (PRISMA) guideline for Systematic reviews (Liberati et al., 2009). In order to register this review, we submitted it to the international prospective register of systematic reviews (PROSPERO). However, PROSPERO rejected this submission as they deemed it to be outside of its’ scope; our review looks at survey mechanism and does not focus on any particular health outcome (see appendix for decision email).</p>
+<div id="search-strategy" class="section level3">
+<h3>Search strategy</h3>
+<p>On 14th of November 2018, the medical database Medline, Web of Science, CINAHL and PsychINFO were searched for epidemiological studies using paper-based and digital surveys, these include cross-sectional, case-control, observational cohort and longitudinal studies. Also, the Medical Research Council (MRC) Cohort directory, was searched for literature that were not found in the medical databases. This review specifically focuses on peer-reviewed articles that have already been published and that are in the English language.</p>
+<p>Using the PICOS concepts, the initial search strategy is based on the following five key concepts: data collection terms (i.e. surveys), type of surveys (i.e. paper survey), outcomes (i.e. response rate) and survey methodology (i.e. mode preference). The concepts were further expanded using thesaurus terms and terms mined from reviews conducted by Shih and Fan (2008), Manfreda et al. (2008) and Belisario et al. (2015). For accurate and efficient search results, the concepts, and terms were stringed together using Boolean operators. In addition to this, for certain terms, truncation was applied to broaden the search to include terms with various word endings. Once the initial strategy was complete, a preliminary search was conducted.</p>
+<p>Subsequently, using the results of the preliminary search, a list of keywords and MeSH terms were harvested from the relevant papers. With the harvested search terms, a search strategy with Boolean combination were developed. This was further piloted in various combinations, thus seeking the optimal strategy that is both sensitive and specific. Sensitivity was defined as the number of relevant studies that were retrieved as a proportion of all the relevant articles in existence; and specificity was defined as the number of relevant studies that were identified by the search strategy as a proportion of all articles (relevant and irrelevant) identified by that search (Montori et al., 2005). See appendix 1 for the full search strategy.</p>
+</div>
+<div id="inclusion-exclusion" class="section level3">
+<h3>Inclusion &amp; Exclusion</h3>
+<p>Included study designs were studies which utilised mixed-methodology for data collection of either paper-based with digital or different digital methods to collect self-completed questionnaire data on exposure and/or outcome in an epidemiological investigation of the prevalence or incidence of disease or measures of association between exposure and disease. The eligible studies were studies that were published from inception until November 2018. In addition to this, included studies were studies that provided information on survey response rate, missing data, population sampled and whether survey reminders or notifications were used. Studies were excluded if they looked at other non-epidemiological domains such as education, business and social sciences, or if they only use a single survey mode for data collection (digital surveys only or paper-based surveys only). Also, studies were excluded if they did not report individual response rate for each survey methods. Our main study outcome was the overall response rate difference (d), this is calculated as the difference between two different survey methods (i.e. web survey response rate subtracted by paper survey response rate).</p>
+</div>
+<div id="screening" class="section level3">
+<h3>Screening</h3>
+<p>One reviewer screened the title and abstract of the search results. Studies that were difficult to screen, based on their abstract and title, were deferred for full article screening.</p>
+</div>
+<div id="quality-appraisal" class="section level3">
+<h3>Quality appraisal</h3>
+<p>Once the full eligible papers were selected, the quality of the studies were assessed using the US National Institute of Health National Heart, Lung, and Blood Institute Quality Assessment Tool for Observational Cohort and Cross-Sectional Studies (NIH, 2014). This is a widely used assessment tool to determine the quality of observational cohort and cross-sectional studies. The summary of each study was calculated and expressed as a percentage. The interpretation for the scale was categorised into four groups: poor (0–25%), fair (25–50%), good (50–75%) or excellent (75–10%) (Maass et al., 2015). Studies that are off poor quality will not be included in the analysis.</p>
+</div>
+<div id="data-extraction" class="section level3">
+<h3>Data extraction</h3>
+<p>One reviewer carried out the data extraction of all the eligible papers. The following the items were extracted:</p>
+<ol style="list-style-type: decimal">
+<li>Study design</li>
+<li>Outcome of study</li>
+<li>Population type</li>
+<li>Random assignment (y/n)</li>
+<li>Incentives (y/n)</li>
+<li>Reminder (y/n)</li>
+<li>Sample Size (n)</li>
+<li>Administration method(s)</li>
+<li>Delivery method(s)</li>
+<li>Response rate per-population (n %)</li>
+<li>Completeness (Missing data %)</li>
+</ol>
+</div>
+<div id="data-analysis" class="section level3">
+<h3>Data analysis</h3>
+<p>We looked at the response rate difference between paper-based and digital surveys using a random-effects model as it is anticipated that the eligible studies will differ in study designs, study populations and survey features (DerSimonian and Laird, 1986). Random-effects models assume essential random differences between studies, and also account for a true random variation in effect sizes between these studies. Additionally, random-effects models allow us to make inferences beyond the studies reviewed.</p>
+<p>We have also graphically illustrated a pooled study effects using a forest plot. Response rates were in the same measurement scale (in proportions), and so, therefore, no conversion/standardisation was required. The response rate difference (d) was our effect size measure; it was calculated as: d = (paper survey response rate) – (digital survey response rate).</p>
+<p>We have also conducted a group-analysis using a random effects model, with the studies grouped by their study features. In addition to this a meta-regression was conducting evaluating the relationship between publication year and response rate difference, the dependent variable was the weighted response rate difference (d) and the independent was the publication year.</p>
+<p>All analysis were conducted using R statistical program version 3.3.2 (Team, 2013). More specifically, Meta package (version 4.9-4) (Schwarzer and Schwarzer, 2012)was used for the meta-analysis forest plots. The full R script for the meta-analysis is included in the appendix.</p>
+</div>
+</div>
+<div id="analysis-results" class="section level2">
+<h2>Analysis &amp; Results</h2>
+<div id="study-selection" class="section level3">
+<h3>Study selection</h3>
+<p>Our literature search provided us with 1,193 citations. Upon screening the abstracts, our list came down to 32 articles. Once the full eligibility criteria were applied, 18 studies were included in the review. Within the list of the full articles excluded from the review, 11 failed to provide non-combined response rates for the survey modes and three of them were on non-epidemiological topics.</p>
+</div>
+<div id="study-characteristics" class="section level3">
+<h3>Study characteristics</h3>
+<p>Within our included studies, 16 studies were a cross-sectional design and two were a cohort design. All of the studies compared paper surveys with web surveys. One study also compared paper surveys with SMS surveys. For paper surveys, 14 were administered through the post and only 3 were administered face-to-face, whereas, within web surveys, 8 were administered via post, five through e-mail, two by face-to-face and one on an online forum (see table 1). With regards to study features, majority of studies randomly assigned participants to survey method (67%) and utilised survey reminders (72%), while only 39% of the studies gave out monetary incentives. Study populations variedly greatly between studies, it wasn’t possible to group them in this review. Also, due to differential reporting in response rates per demographics in the reviewed studies, it was not possible to breakdown down response rate per a demography.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Characteristics</th>
+<th align="center">Number of studies (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Study design</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">    Cross-sectional</td>
+<td align="center">16 (89)</td>
+</tr>
+<tr class="odd">
+<td align="left">    Cohort</td>
+<td align="center">2 (11)</td>
+</tr>
+<tr class="even">
+<td align="left">    </td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Delivery method</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">    Paper</td>
+<td align="center">18 (100)</td>
+</tr>
+<tr class="odd">
+<td align="left">    Web</td>
+<td align="center">18 (100)</td>
+</tr>
+<tr class="even">
+<td align="left">    SMS</td>
+<td align="center">1 (6)</td>
+</tr>
+<tr class="odd">
+<td align="left">    </td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Administration method</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">  Paper Survey</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">    Face-to-face</td>
+<td align="center">3 (17)</td>
+</tr>
+<tr class="odd">
+<td align="left">    Post</td>
+<td align="center">14 (83)</td>
+</tr>
+<tr class="even">
+<td align="left">  Web Survey</td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">    Face-to-face</td>
+<td align="center">2 (11)</td>
+</tr>
+<tr class="even">
+<td align="left">    Post</td>
+<td align="center">8 (44)</td>
+</tr>
+<tr class="odd">
+<td align="left">    E-mail</td>
+<td align="center">5 (33)</td>
+</tr>
+<tr class="even">
+<td align="left">    Online Banners</td>
+<td align="center">1 (6)</td>
+</tr>
+<tr class="odd">
+<td align="left">    </td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Random assignment</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">    Yes</td>
+<td align="center">12 (67)</td>
+</tr>
+<tr class="even">
+<td align="left">    No</td>
+<td align="center">5 (33)</td>
+</tr>
+<tr class="odd">
+<td align="left">    </td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Reminder</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">    Yes</td>
+<td align="center">13 (72)</td>
+</tr>
+<tr class="even">
+<td align="left">    No</td>
+<td align="center">5 (28)</td>
+</tr>
+<tr class="odd">
+<td align="left">    </td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Incentive</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">    Yes</td>
+<td align="center">7 (39)</td>
+</tr>
+<tr class="even">
+<td align="left">    No</td>
+<td align="center">11 (61)</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1: A descriptive summary of the characteristics of the studies reviewed</p>
+</div>
+<div id="quality-appraisal-1" class="section level3">
+<h3>Quality Appraisal</h3>
+<p>The quality of the studies averaged between fair and good. One study had poor quality, eight studies had fair quality and three studies were of good quality. The risk of bias was due to some of the items that weren’t relevant to all study designs, items that were relevant to cohort studies. Such as outcome blinding and assessment of exposure prior to measurement of outcome. The study with poor quality (McCabe 04) was excluded from the review as it below our cut off margin. Table 3 includes the quality assessment of the studies reviewed.</p>
+</div>
+<div id="preparation-for-data-synthesis" class="section level3">
+<h3>Preparation for data synthesis</h3>
+<p>Here we will install and run all the relelvant packages as well as upload our data.</p>
+<div id="install-dependencies" class="section level4">
+<h4>Install dependencies</h4>
 <pre class="r"><code># Install dependencces 
 library(prettydoc)
+library(knitr)
 library(readxl)
 library(meta)
 library(metafor)
 library(dplyr)</code></pre>
 </div>
-<div id="load-the-data-into-r" class="section level2">
-<h2>Load the data into R</h2>
+<div id="load-the-data-into-r" class="section level4">
+<h4>Load the data into R</h4>
 <pre class="r"><code># Import the data
-RR_data &lt;- readxl::read_xlsx(&quot;Data/RR_data_3.xlsx&quot;)
-
-# Inspect the data
-str(RR_data)</code></pre>
-<pre><code>Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:   18 obs. of  20 variables:
- $ study             : chr  &quot;Kongsved et al, 2007&quot; &quot;Mlikotic et al, 2016&quot; &quot;Sinclair et al, 2012&quot; &quot;Palmen et al,  2015&quot; ...
- $ type              : chr  &quot;Paper Vs Web&quot; &quot;Paper Vs Web&quot; &quot;Paper Vs Web&quot; &quot;Paper Vs Web&quot; ...
- $ year              : num  2007 2016 2012 2015 2014 ...
- $ samples           : num  533 1192 26500 48 2316 ...
- $ paper_surv        : num  76.5 57.7 9.2 88 67 78.3 57 87.2 62.3 42 ...
- $ dig_survey        : num  64.2 31.1 2.8 33.3 64.7 87.4 41.9 86.2 30.9 42 ...
- $ rr_diff           : num  12.3 26.6 6.4 54.7 2.3 ...
- $ rr_var            : num  2.0216 0.4643 0.0025 0.5338 2.0464 ...
- $ weight            : num  0.008543 0.019105 0.424727 0.000769 0.03712 ...
- $ rr_weighted       : num  0.1051 0.5082 2.7183 0.0421 0.0854 ...
- $ var_weighted      : num  0.01727 0.008871 0.001064 0.000411 0.07596 ...
- $ paper_missing     : num  36.6 NA 0.4 NA NA 21.1 NA 12 NA NA ...
- $ dig_missing       : num  2.2 NA 0 NA NA 10.1 NA 17 NA NA ...
- $ miss_diff         : num  34.4 NA 0.4 NA NA 11 NA -5 NA NA ...
- $ miss_var          : num  -2.16 NA 9.06e-06 NA NA ...
- $ miss_diff_weighted: num  0.294 NA 0.17 NA NA ...
- $ miss_var_weighted : num  -1.84e-02 NA 3.85e-06 NA NA ...
- $ rand_assign       : chr  &quot;No&quot; &quot;No&quot; &quot;Yes&quot; &quot;Yes&quot; ...
- $ incentives        : chr  &quot;No&quot; &quot;No&quot; &quot;Yes&quot; &quot;No&quot; ...
- $ reminder          : chr  &quot;Yes&quot; &quot;No&quot; &quot;Yes&quot; &quot;Yes&quot; ...</code></pre>
+RR_data &lt;- readxl::read_xlsx(&quot;/Users/mohamedyusuf/R/Epidemiology in R /MRes/Responserate_mres/data/RR_data_3.xlsx&quot;)</code></pre>
 </div>
-<div id="label-some-of-the-categorical-data" class="section level2">
-<h2>Label some of the categorical data</h2>
+<div id="label-some-of-the-categorical-data" class="section level4">
+<h4>Label some of the categorical data</h4>
 <pre class="r"><code># make lables for the incentive levels
 RR_data$incentives &lt;- factor(RR_data$incentives,
 levels = c(&quot;Yes&quot;, &quot;No&quot;),
@@ -616,19 +646,17 @@ levels = c(&quot;Yes&quot;, &quot;No&quot;),
 labels = c(&quot;Randomly Assigned&quot;, &quot;Not Randomly Assigned&quot;))</code></pre>
 </div>
 </div>
-<div id="random-effects-models" class="section level1">
-<h1>Random Effects Models</h1>
+<div id="random-effects-models" class="section level3">
+<h3>Random Effects Models</h3>
 <p>Here we will create effect size and sample variance for the model. After that we will input these variables into the model.</p>
-<div id="make-effect-size-variable" class="section level2">
-<h2>make effect size variable</h2>
+<div id="build-random-effects-model-using-the-metagen-function" class="section level4">
+<h4>Build Random effects model using the metagen function</h4>
 <pre class="r"><code># effect size 
 yi &lt;-  RR_data$rr_diff
 # sample varience 
-vi &lt;- RR_data$rr_var</code></pre>
-</div>
-<div id="build-random-effects-model-using-the-metagen-function" class="section level2">
-<h2>Build Random effects model using the metagen function</h2>
-<pre class="r"><code># RE Model
+vi &lt;- RR_data$rr_var
+
+# RE Model
 RE_model&lt;-metagen(yi,
               vi,
               label.e = &quot;Paper Survey&quot;,
@@ -641,13 +669,13 @@ RE_model&lt;-metagen(yi,
               prediction=F,
               sm=&quot;SMD&quot;)</code></pre>
 </div>
-<div id="forest-plot" class="section level2">
-<h2>Forest Plot</h2>
+<div id="forest-plot" class="section level4">
+<h4>Forest Plot</h4>
 <p>We will now produce a forest plot using our RE model and then look at the statistical output of RE Model</p>
 <pre class="r"><code># forest plot 
 
 forest(RE_model,
-       xlim = c(-20,50),
+       xlim = c(-30,57),
        rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
        leftlabs = c(&quot;Author(s) and Year &quot;),
        just.addcols.left = &quot;left&quot;,
@@ -656,6 +684,7 @@ forest(RE_model,
        label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
        label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
        smlab = &quot;&quot;,
+       colgap.forest.left = &quot;1.5cm&quot;,
        col.by = &quot;black&quot;,
        text.random = &quot;Overall effect&quot;,
        print.tau2 = FALSE,
@@ -666,7 +695,12 @@ forest(RE_model,
        digits.sd = 2,
        print.I2 = TRUE,
        print.Q = TRUE)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-4-1.png" alt=" Figure 2: The dashed vertical line represents the combined survey mode effect (0). The RR (Response rate) difference (12.30; 95% confidence interval = 4.80 to 19.80). TE represents study effect size and seTE represents its variance." width="960" />
+<p class="caption">
+Figure 2: The dashed vertical line represents the combined survey mode effect (0). The RR (Response rate) difference (12.30; 95% confidence interval = 4.80 to 19.80). TE represents study effect size and seTE represents its variance.
+</p>
+</div>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-4-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -698,7 +732,6 @@ Mohamed Yusuf
 </table>
 <p></details></p>
 <pre class="r"><code># RE Model ouput
-
 summary(RE_model)</code></pre>
 <pre><code>Number of studies combined: k = 18
 
@@ -716,16 +749,16 @@ Details on meta-analytical method:
 - Inverse variance method
 - DerSimonian-Laird estimator for tau^2
 - Hartung-Knapp adjustment for random effects model</code></pre>
-<p>Our model gives an overall weighted response rate difference of 12.30% (95% CI, 4.80 to 19.80), between paper and online surveys. However, the heterogeneity of the studies included was very significant with a Q score of 17,397 (I2 = 100%; p = 0.00). This substantial heterogeneity warrants further investigation.</p>
+<p>A random effects meta-analysis conducted, giving an overall weighted response rate difference of 12.30% (95% CI, 4.80 to 19.80), between paper and online surveys. However, the heterogeneity of the studies included was very significant with a Q score of 17, 397 (I2 = 100%; p = 0.00), See figure 2 This substantial heterogeneity warranted further investigation.</p>
 </div>
 </div>
-<div id="between-study-heterogeneity" class="section level1">
-<h1>Between-study Heterogeneity</h1>
+<div id="between-study-heterogeneity" class="section level3">
+<h3>Between-study Heterogeneity</h3>
 <p>To detect influential studies that may be pushing the effect of our analysis into one direction. We applied Viechtbauer and Cheung’s (2010) method for detecting statistical outliers. This involved categorising studies whose confidence interval did not overlap with the overall effect confidence interval as outliers (Viechtbauer and Cheung, 2010).</p>
-<div id="detecting-outliers" class="section level2">
-<h2>Detecting outliers</h2>
-<p>In order to do this we must create an R package that aids us in spotting these outliers based on there confidence interval</p>
-<pre class="r"><code># Make a function to aid detection outliers
+<div id="detecting-outliers" class="section level4">
+<h4>Detecting outliers</h4>
+<p>In order to do this we must create an R package that aids us in spotting these outliers based on there confidence interval.</p>
+<pre class="r"><code># make a function to aid detection outliers
 spot.outliers.random&lt;-function(data){
   data&lt;-data
   Author&lt;-data$studlab
@@ -745,11 +778,10 @@ spot.outliers.random(data=RE_model)</code></pre>
 2  Palmen et al,  2015 53.65379 55.74621
 3       Le et al, 2018 30.50266 32.29734
 4  Kallmen et al, 2011 26.75652 28.04348</code></pre>
-<p>Based on our outlier function, four studies stand out greatly as their lower-bound CI is greater than the upper bound CI of our pooled effect size. These studies are Mlikotic et al, 2016, Palmen et al, 2015, Le et al, 2018 and Kallmen et al, 2011.</p>
+<p>To detect outliers that may be pushing the effect of our analysis into one direction. We applied Viechtbauer and Cheung’s (2010) method for detecting statistical outliers. This involved categorising studies whose confidence interval did not overlap with the overall effect confidence interval as outliers. From this, we found Mlikotic et al, 2016, Palmen et al, 2015, Le et al, 2018 and Kallmen et al, 2011 to stand out greatly as their lower-bound CI was far greater than the upper bound CI of our pooled effect size</p>
 </div>
-<div id="influence-analysis" class="section level2">
-<h2>Influence analysis</h2>
-<p>To analyse the individual impact on heterogeneity, each study was removed from the meta-analysis one at a time, and the individual influence on I2 was estimated. In addition, to this a diagnostic plot called Baujat plot (ref) inspecting overall heterogeneity was conducted. Baujat plot assess the contribution of each study by overall heterogeneity as measured by Cochran’s Q, and its influence on the pooled effect size on the vertical axis.</p>
+<div id="influence-analysis" class="section level4">
+<h4>Influence analysis</h4>
 <pre class="r"><code># make an influence function 
 
 influence.analysis&lt;-function(data, method.tau, hakn){
@@ -768,19 +800,15 @@ influence.analysis&lt;-function(data, method.tau, hakn){
     res
     inf &lt;- influence(res)
     influence.data&lt;-metainf(data)
-    influence.data$I2&lt;-format(round(influence.data$I2,2),nsmall=2)
-    plot(inf)
-    baujat(data,  yscale=10, xmin=10, ymin=1,
-       pos=2, xlim=c(-1500, 4200), cex.studlab = 0.8)
-    forest(influence.data,
-           sortvar=I2,
-           rightcols = c(&quot;TE&quot;,&quot;ci&quot;,&quot;I2&quot;),
-           smlab = &quot;Sorted by I-squared&quot;)
-    forest(influence.data,
+  
+     forest(influence.data,
            sortvar=TE,
            rightcols = c(&quot;TE&quot;,&quot;ci&quot;,&quot;I2&quot;),
            smlab = &quot;Sorted by Effect size&quot;)
     
+    baujat(data,  yscale=10, xmin=10, ymin=1,
+       pos=2, xlim=c(-1500, 4200), font= 2,cex.studlab = 0.7)
+
   } else {
     
     res &lt;- rma(yi=TE, sei=seTE, measure=&quot;ZCOR&quot;, 
@@ -804,7 +832,12 @@ influence.analysis&lt;-function(data, method.tau, hakn){
   }}  
 
 influence.analysis(data=RE_model,method.tau = &quot;SJ&quot;, hakn = TRUE)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-1.png" alt="Figure 3: Leave-one-out analysis - the plot is ordered by effect size (low to high). The top four studies are the most influential and also, they are the same studies as our outliers." width="960" />
+<p class="caption">
+Figure 3: Leave-one-out analysis - the plot is ordered by effect size (low to high). The top four studies are the most influential and also, they are the same studies as our outliers.
+</p>
+</div>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-6-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -834,7 +867,13 @@ Mohamed Yusuf
 </tr>
 </tbody>
 </table>
-<p></details> <img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+</details>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-2.png" alt="Figure 4: Baujat plot inspecting overall heterogeneity. The x axis represents the contribution of the studies to the overall heterogeneity, while the y axis represents the influence that the studies have on the overall heterogeneity. The most influential and heterogenous studies appear in the top right." width="960" />
+<p class="caption">
+Figure 4: Baujat plot inspecting overall heterogeneity. The x axis represents the contribution of the studies to the overall heterogeneity, while the y axis represents the influence that the studies have on the overall heterogeneity. The most influential and heterogenous studies appear in the top right.
+</p>
+</div>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-6-2.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -864,83 +903,21 @@ Mohamed Yusuf
 </tr>
 </tbody>
 </table>
-<p></details> <img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-3.png" width="672" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of unnamed-chunk-6-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/truenomad/responserate_mres/blob/06682ef126ec3de5b0a832d4ad1cf36f05961e31/docs/figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-3.png" target="_blank">06682ef</a>
-</td>
-<td style="text-align:left;">
-Mohamed Yusuf
-</td>
-<td style="text-align:left;">
-2019-01-23
-</td>
-</tr>
-</tbody>
-</table>
-<p></details> <img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-4.png" width="672" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of unnamed-chunk-6-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/truenomad/responserate_mres/blob/06682ef126ec3de5b0a832d4ad1cf36f05961e31/docs/figure/RR_Meta-analysis.Rmd/unnamed-chunk-6-4.png" target="_blank">06682ef</a>
-</td>
-<td style="text-align:left;">
-Mohamed Yusuf
-</td>
-<td style="text-align:left;">
-2019-01-23
-</td>
-</tr>
-</tbody>
-</table>
 <p></details></p>
-<p>Based on our Baujat and influential analysis, five studies appear to stand out greatly, four of which we already have come across in our initial outlier analysis.</p>
-<p>Mlikotic et al, 2016, Sinclair et al, 2012 Palmen et al, 2015, Le et al, 2018 and Kallmen et al, 2011.</p>
+<p>We further supplemented our statistical outlier analysis with leave-one-out analysis (Viechtbauer and Cheung, 2010). Each study was removed from the meta-analysis one at a time, and the individual influence on effect size was estimated figure 3. The four outlying studies have the highest effect sizes, and when removed they have an impact on the overall effect size. This confers with our previous finding of these four studies being the outliers.</p>
+<p>In addition to the leave-one-out analysis, a diagnostic plot called Baujat plot (2002), inspecting the overall heterogeneity, was conducted (figure 4). Baujat plot assess the contribution of each study by overall heterogeneity as measured by Cochran’s Q, and its influence on the pooled effect size on the vertical axis. From our, findings, Mlikotic et al, 2016, Le et al, 2018 and Kallmen et al, 2011 all have very high impact on overall heterogeneity and very low influence on overall results, while Sinclair et al, 2012 has very high influence on the overall results and very low contribution on the overall heterogeneity. These four studies greatly stand out, from the other reviewed studies, three of them have already appeared in the previous two tests.</p>
+<p>All of the tests above, point towards the same direction. They highlight that the following five studies; Mlikotic et al, 2016, Le et al, 2018, Kallmen et al, 2011, Palmen et al, 2015 and Sinclair et al, 2012 are most likely outlier that may be influencing our effects size and precision estimates. As such, they were excluded, and a sensitivity analysis was conducted.</p>
 </div>
-<div id="sensitivity-analysis" class="section level2">
-<h2>Sensitivity analysis</h2>
+<div id="sensitivity-analysis" class="section level4">
+<h4>Sensitivity analysis</h4>
 <p>We will now conduct a sensitivity analysis in which the five identified outlier studies are excluded.</p>
 <pre class="r"><code># remove outliers
-
 RE.model.outliers&lt;-update.meta(RE_model,
                            subset = -c(2,3,4,9,15))
 
-
 # re-run forest plot 
-
 forest(RE.model.outliers,
-       xlim = c(-20,60),
+       xlim = c(-20,30),
        rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
        leftlabs = c(&quot;Author(s) and Year &quot;),
        just.addcols.left = &quot;left&quot;,
@@ -950,6 +927,7 @@ forest(RE.model.outliers,
        label.left=&quot;Favours Digital&quot;, col.label.left=&quot;dark green&quot;,
        smlab = &quot;&quot;,
        col.by = &quot;black&quot;,
+       colgap.forest.left = &quot;2cm&quot;,
        text.random = &quot;Overall effect&quot;,
        print.tau2 = FALSE,
        print.byvar =F,
@@ -959,7 +937,12 @@ forest(RE.model.outliers,
        digits.sd = 2,
        print.I2 = TRUE,
        print.Q = TRUE)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-7-1.png" alt="Figure 5: Meta-analysis with the five outlier studies omitted. The dashed vertical line represents the combined survey mode effect (0). The RR (Response rate) difference (5.90; 95% confidence interval = 1.59 to 10.23). TE represents study effect size and seTE represents its variance." width="960" />
+<p class="caption">
+Figure 5: Meta-analysis with the five outlier studies omitted. The dashed vertical line represents the combined survey mode effect (0). The RR (Response rate) difference (5.90; 95% confidence interval = 1.59 to 10.23). TE represents study effect size and seTE represents its variance.
+</p>
+</div>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-7-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -991,7 +974,6 @@ Mohamed Yusuf
 </table>
 <p></details></p>
 <pre class="r"><code># RE Model ouput
-
 summary(RE.model.outliers)</code></pre>
 <pre><code>Number of studies combined: k = 13
 
@@ -1009,15 +991,15 @@ Details on meta-analytical method:
 - Inverse variance method
 - DerSimonian-Laird estimator for tau^2
 - Hartung-Knapp adjustment for random effects model</code></pre>
-<p>Subsequent to the removal of the five outlier studies, the Q score of went down to 239.85 (I2 = 95%; p = 0.0001). That is a drastic drop from the previous Q score which was 17, 397. This further confirms that the outliers were considerably adding to the studies heterogeneity.</p>
+<p>After dropping the five studies, the random effects meta-analysis was reproduced. The heterogeneity of the studies included is still very significant (I2 = 95%; p = 0.01). However, the heterogeneity has changed due to the omission of the outlier studies, prior to the omission the Q score was 17, 397, after the omission the q score has dropped down to 239.85. Within forest plot, one study favoured online surveys, two were neutral in their effect size, and the rest of the reviewed studies favoured paper surveys – illustrated in figure 5.</p>
 <p>In addition to this, the new updated model has an effect size of 5.9% and a 95% confidence interval between 3.77 and 5.31; this confidence interval is much narrower than the confidence interval of the previous interval, suggesting that the previous studies were inflating the effect size.</p>
 </div>
 </div>
-<div id="subgroup-analysis" class="section level1">
-<h1>Subgroup analysis</h1>
+<div id="subgroup-analysis" class="section level3">
+<h3>Subgroup analysis</h3>
 <p>Now we want to know study specfic features and effects on our meta-analysis. In order to do this we will do subgroup analysis.</p>
-<div id="type-of-surveys" class="section level2">
-<h2>Type of surveys</h2>
+<div id="type-of-surveys" class="section level4">
+<h4>Type of surveys</h4>
 <p>Analysis looking at whether the type of study comparisons has impact on the effect size</p>
 <pre class="r"><code># build a REM for between-subgroup-differences in random assignments
 type.subgroup&lt;-update.meta(RE.model.outliers, 
@@ -1025,8 +1007,36 @@ type.subgroup&lt;-update.meta(RE.model.outliers,
                              comb.random = TRUE, 
                              comb.fixed = FALSE)
 
-# forest plot of sub-group RE Model
+summary(type.subgroup)</code></pre>
+<pre><code>Number of studies combined: k = 13
 
+                        SMD            95%-CI    t p-value
+Random effects model 5.9075 [1.5899; 10.2250] 2.98  0.0115
+
+Quantifying heterogeneity:
+tau^2 = 49.4838; H = 4.47 [3.77; 5.31]; I^2 = 95.0% [92.9%; 96.5%]
+
+Quantifying residual heterogeneity:
+H = 4.58 [3.84; 5.47]; I^2 = 95.2% [93.2%; 96.7%]
+
+Test of heterogeneity:
+      Q d.f.  p-value
+ 239.85   12 &lt; 0.0001
+
+Results for subgroups (random effects model):
+                      k     SMD             95%-CI      Q   tau^2   I^2
+type = Paper Vs Web  12  5.1429 [ 0.7754;  9.5104] 231.11 49.5912 95.2%
+type = Paper Vs SMS   1 15.2000 [10.0632; 20.3368]   0.00      --    --
+
+Test for subgroup differences (random effects model):
+                    Q d.f. p-value
+Between groups   9.36    1  0.0022
+
+Details on meta-analytical method:
+- Inverse variance method
+- DerSimonian-Laird estimator for tau^2
+- Hartung-Knapp adjustment for random effects model</code></pre>
+<pre class="r"><code># forest plot of sub-group RE Model
 forest(type.subgroup,
        xlim = c(-20,30),
        rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
@@ -1049,7 +1059,12 @@ forest(type.subgroup,
        digits.sd = 2,
        print.I2 = TRUE,
        print.Q = TRUE)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-8-1.png" alt="Figure 6: Sub-group analysis of the type surveys compared. Both groups favour paper surveys but differ in overall effect size. TE represents study effect size and seTE represents its variance." width="960" />
+<p class="caption">
+Figure 6: Sub-group analysis of the type surveys compared. Both groups favour paper surveys but differ in overall effect size. TE represents study effect size and seTE represents its variance.
+</p>
+</div>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-8-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1081,7 +1096,6 @@ Mohamed Yusuf
 </table>
 <p></details></p>
 <pre class="r"><code># RE Model ouput
-
 summary(type.subgroup)</code></pre>
 <pre><code>Number of studies combined: k = 13
 
@@ -1111,26 +1125,17 @@ Details on meta-analytical method:
 - Inverse variance method
 - DerSimonian-Laird estimator for tau^2
 - Hartung-Knapp adjustment for random effects model</code></pre>
-<p>Our surveys have various different features. One othe features</p>
+<p>From our included studies, one study compared paper surveys with SMS surveys, while the rest compared paper surveys with web surveys. The two groups varied drastically with a Q of 9.36 and p-value of 0.0022, paper versus web group has a response rate difference of 5.13 (95% CI 0.78 – 9.51) while the paper versus SMS has a response rate of 15.2 (95% 10.06 – 20.34). However, despite the difference it is difficult to conclude anything because of the small number of studies in the paper versus SMS group (figure 6).</p>
 </div>
-<div id="random-assignment" class="section level2">
-<h2>Random assignment</h2>
+<div id="random-assignment" class="section level4">
+<h4>Random assignment</h4>
 <pre class="r"><code># build a REM for between-subgroup-differences in random assignments
 rand.subgroup&lt;-update.meta(RE.model.outliers, 
                              byvar=rand_assign, 
                              comb.random = TRUE, 
                              comb.fixed = FALSE)
 
-RR_data$rand_assign</code></pre>
-<pre><code> [1] Not Randomly Assigned Not Randomly Assigned Randomly Assigned    
- [4] Randomly Assigned     Not Randomly Assigned Not Randomly Assigned
- [7] Randomly Assigned     Randomly Assigned     Randomly Assigned    
-[10] Randomly Assigned     Not Randomly Assigned Randomly Assigned    
-[13] Randomly Assigned     Randomly Assigned     Randomly Assigned    
-[16] Randomly Assigned     Not Randomly Assigned Randomly Assigned    
-Levels: Randomly Assigned Not Randomly Assigned</code></pre>
-<pre class="r"><code># forest plot of sub-group RE Model
-
+# forest plot of sub-group RE Model
 forest(rand.subgroup,
        xlim = c(-20,30),
        rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
@@ -1152,7 +1157,12 @@ forest(rand.subgroup,
        digits.sd = 2,
        print.I2 = TRUE,
        print.Q = TRUE)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-9-1.png" alt="Figure 7: Sub-group analysis of random assignment use. Both groups favour paper surveys but differ in overall effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance." width="960" />
+<p class="caption">
+Figure 7: Sub-group analysis of random assignment use. Both groups favour paper surveys but differ in overall effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance.
+</p>
+</div>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-9-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1184,7 +1194,6 @@ Mohamed Yusuf
 </table>
 <p></details></p>
 <pre class="r"><code># RE Model ouput
-
 summary(rand.subgroup)</code></pre>
 <pre><code>Number of studies combined: k = 13
 
@@ -1217,9 +1226,10 @@ Details on meta-analytical method:
 - Inverse variance method
 - DerSimonian-Laird estimator for tau^2
 - Hartung-Knapp adjustment for random effects model</code></pre>
+<p>As seen in figure 7, studies that randomly assigned individuals into either paper or digital surveys had a mean response rate difference of 7.50 (95% CI, 2.03 to 12.97), whereas the studies that did not utilise the random assignment feature had a response rate difference of 3.37 (95% CI, 6.53 to 13.28). Both groups had an overall effect size of 5.91 (95% CI, 1.59 to 10.23), though, there was no significant difference between the two groups (Q = 0.94, p= 0.339), hence random assignment does not explain the difference in response rate between the two survey methods.</p>
 </div>
-<div id="incentives" class="section level2">
-<h2>Incentives</h2>
+<div id="incentives" class="section level4">
+<h4>Incentives</h4>
 <pre class="r"><code># build a REM for between-subgroup-differences in random assignments
 incent.subgroup&lt;-update.meta(RE.model.outliers, 
                              byvar=incentives, 
@@ -1227,7 +1237,6 @@ incent.subgroup&lt;-update.meta(RE.model.outliers,
                              comb.fixed = FALSE)
 
 # forest plot of sub-group RE Model
-
 forest(incent.subgroup,
        xlim = c(-20,30),
       rightlabs = c(&quot;RR difference&quot;,&quot;95% CI&quot;),
@@ -1248,7 +1257,12 @@ forest(incent.subgroup,
        digits.sd = 2,
        print.I2 = TRUE,
        print.Q = TRUE)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-10-1.png" alt="Figure 8: Sub-group analysis of monetary incentive use. Both groups favour paper surveys but differ in effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance." width="960" />
+<p class="caption">
+Figure 8: Sub-group analysis of monetary incentive use. Both groups favour paper surveys but differ in effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance.
+</p>
+</div>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-10-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1280,7 +1294,6 @@ Mohamed Yusuf
 </table>
 <p></details></p>
 <pre class="r"><code># RE Model ouput
-
 summary(incent.subgroup)</code></pre>
 <pre><code>Number of studies combined: k = 13
 
@@ -1313,9 +1326,10 @@ Details on meta-analytical method:
 - Inverse variance method
 - DerSimonian-Laird estimator for tau^2
 - Hartung-Knapp adjustment for random effects model</code></pre>
+<p>Studies that used reminders had a response rate difference of 7.47 (95% CI; 1.45 to 13.49) and studies that did not use reminders had a difference of 2.55 (95% CI; 1.59 to 10.23) – see figure 9 of full breakdown. Use of reminders does not impact overall effect size, there was no significant difference between two groups (Q = 2.23; p=0.135).</p>
 </div>
-<div id="reminder" class="section level2">
-<h2>Reminder</h2>
+<div id="reminder" class="section level4">
+<h4>Reminder</h4>
 <pre class="r"><code># build a REM for between-subgroup-differences in random assignments
 remin.subgroup&lt;-update.meta(RE.model.outliers, 
                              byvar=reminder,
@@ -1324,7 +1338,6 @@ remin.subgroup&lt;-update.meta(RE.model.outliers,
                              comb.fixed = FALSE)
 
 # forest plot of sub-group RE Model
-
 forest(remin.subgroup,
        xlim = c(-20,30),
        label.right=&quot;Favours Paper&quot;, col.label.right=&quot;dark red&quot;,
@@ -1340,39 +1353,8 @@ forest(remin.subgroup,
        digits.sd = 2,
        print.I2 = TRUE,
        print.Q = TRUE)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of unnamed-chunk-11-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/truenomad/responserate_mres/blob/06682ef126ec3de5b0a832d4ad1cf36f05961e31/docs/figure/RR_Meta-analysis.Rmd/unnamed-chunk-11-1.png" target="_blank">06682ef</a>
-</td>
-<td style="text-align:left;">
-Mohamed Yusuf
-</td>
-<td style="text-align:left;">
-2019-01-23
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+<p><img src="figure/RR_Meta-analysis.Rmd/Figure%209:%20Sub-group%20analysis%20of%20surveys%20reminders.%20Both%20groups%20favour%20paper%20surveys%20but%20differ%20in%20effect%20size,%20though%20this%20difference%20is%20not%20significant.%20TE%20represents%20study%20effect%20size%20and%20seTE%20represents%20its%20variance.-1.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># RE Model ouput
-
 summary(remin.subgroup)</code></pre>
 <pre><code>Number of studies combined: k = 13
 
@@ -1405,11 +1387,13 @@ Details on meta-analytical method:
 - Inverse variance method
 - DerSimonian-Laird estimator for tau^2
 - Hartung-Knapp adjustment for random effects model</code></pre>
+<p>Studies that used reminders had a response rate difference of 7.47 (95% CI; 1.45 to 13.49) and studies that did not use reminders had a difference of 2.55 (95% CI; 1.59 to 10.23) – see figure 9 of full breakdown. Use of reminders does not impact overall effect size, there was no significant difference between two groups (Q = 2.23; p=0.135).</p>
 </div>
-<div id="year" class="section level2">
-<h2>Year</h2>
+<div id="year" class="section level4">
+<h4>Year</h4>
 <p>Here will use metaregression to really see if publication year impacts our effect size</p>
-<pre class="r"><code>year.metareg&lt;-metareg(RE.model.outliers, year)
+<pre class="r"><code># linear model for year
+year.metareg&lt;-metareg(RE.model.outliers, year)
 year.metareg</code></pre>
 <pre><code>
 Mixed-Effects Model (k = 13; tau^2 estimator: DL)
@@ -1436,12 +1420,159 @@ year       -0.5470    0.4041  -1.3538  0.2029    -1.4364     0.3423
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 </code></pre>
 <pre class="r"><code>bubble(year.metareg,
        ylim = c(-20, 20),
-       xlim = c(1998, 2020),
+       xlim = c(2000, 2019),
        
        xlab = &quot;Publication Year&quot;,
+       ylab = &quot;Response Rate Difference&quot;,
        col.line = &quot;blue&quot;,
        studlab = F)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-11-1.png" alt="Figure 10: The relationship between response rate difference and publication year." width="960" />
+<p class="caption">
+Figure 10: The relationship between response rate difference and publication year.
+</p>
+</div>
+<details> <summary><em>Expand here to see past versions of unnamed-chunk-11-1.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/truenomad/responserate_mres/blob/06682ef126ec3de5b0a832d4ad1cf36f05961e31/docs/figure/RR_Meta-analysis.Rmd/unnamed-chunk-11-1.png" target="_blank">06682ef</a>
+</td>
+<td style="text-align:left;">
+Mohamed Yusuf
+</td>
+<td style="text-align:left;">
+2019-01-23
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<p>To assess whether year of study publication had impact on response rate difference, a meta-regression was carried. As displayed in figure 10, there is a negative relationship with year of publication and response rate difference, implying that response rate difference dropping slightly as years progress -0.56 (95% CI, -1.44 to 0.34). However, since the confidence interval crosses the zero mark, it is not significant. As such, year of publication was not associated with response rate difference.</p>
+</div>
+</div>
+<div id="missing-data-difference" class="section level3">
+<h3>Missing data difference</h3>
+<p>From our eligible studies, only six had provided data on completeness. Overall missing data difference was 13.9%, meaning that paper surveys had slightly more missing data than online surveys. Mean missing data difference was higher in the studies that did not use random assignment and incentives (respectively, 15.3% vs 12.5% and 34.4% vs 9.8%). Conversely, studies that reminded individuals to complete the survey had a higher missing data difference than studies that did not (22.0% vs -2.2%). See table 4 for a full broke down of the response rate differences.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Study features</th>
+<th align="center">Mean Missing data difference (%) **</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Overall</strong></td>
+<td align="center">13.9*</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Random assignment</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">   Yes</td>
+<td align="center">12.5</td>
+</tr>
+<tr class="even">
+<td align="left">   No</td>
+<td align="center">15.3</td>
+</tr>
+<tr class="odd">
+<td align="left">   </td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Incentives</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">   Yes</td>
+<td align="center">9.8</td>
+</tr>
+<tr class="even">
+<td align="left">   No</td>
+<td align="center">34.4</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Reminders</strong></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">   Yes</td>
+<td align="center">22.0</td>
+</tr>
+<tr class="odd">
+<td align="left">   No</td>
+<td align="center">-2.2</td>
+</tr>
+</tbody>
+</table>
+<p>Table 4: Missing data difference, broken down by study features. *In missing difference, positive difference indicates that paper survey has a higher missing data than web survey (d = paper survey missing data – web survey missing data). **In total, only six studies provided information on missing data.</p>
+</div>
+<div id="administration-method" class="section level3">
+<h3>Administration method</h3>
+<p>Surveys that were administered by post had the biggest response rate difference (14.1%), favouring paper surveys. While surveys administered by post had 10.5%. None of the paper surveys was administered via email or online website, so it was not possible to determine response rate difference for those administration methods.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Administration method</th>
+<th align="center">Paper survey RR</th>
+<th align="center">Web survey RR</th>
+<th align="center">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Face-to-face</td>
+<td align="center">69.1</td>
+<td align="center">58.7</td>
+<td align="center">10.4</td>
+</tr>
+<tr class="even">
+<td align="left">Post</td>
+<td align="center">65.4</td>
+<td align="center">51.4</td>
+<td align="center">14.1</td>
+</tr>
+<tr class="odd">
+<td align="left">E-mail</td>
+<td align="center">-</td>
+<td align="center">61.7</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="left">Online banner</td>
+<td align="center">-</td>
+<td align="center">51.9</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+<p>Table 5: Unweighted mean response rate difference by administration method</p>
+</div>
+<div id="publication-bias" class="section level3">
+<h3>Publication bias</h3>
+<div id="funnel-plot" class="section level4">
+<h4>Funnel plot</h4>
+<p>Here will see if our results are impacted by publication</p>
+<pre class="r"><code># make a funnel plot 
+funnel(RE.model.outliers, xlab=&quot;Hedges&#39; g&quot;, studlab = T)</code></pre>
+<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of unnamed-chunk-12-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1472,46 +1603,17 @@ Mohamed Yusuf
 </tbody>
 </table>
 <p></details></p>
-</div>
-</div>
-<div id="publication-bias" class="section level1">
-<h1>Publication bias</h1>
-<div id="funnel-plot" class="section level2">
-<h2>Funnel plot</h2>
-<p>Here will see if our results are impacted by publication</p>
-<pre class="r"><code>funnel(RE.model.outliers, xlab=&quot;Hedges&#39; g&quot;, studlab = T)</code></pre>
-<p><img src="figure/RR_Meta-analysis.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of unnamed-chunk-13-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/truenomad/responserate_mres/blob/06682ef126ec3de5b0a832d4ad1cf36f05961e31/docs/figure/RR_Meta-analysis.Rmd/unnamed-chunk-13-1.png" target="_blank">06682ef</a>
-</td>
-<td style="text-align:left;">
-Mohamed Yusuf
-</td>
-<td style="text-align:left;">
-2019-01-23
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
 <p>We can see that some studies appear to fall outside of teh funnel, implying that there is a high likelyhood of publication bias within our pool of studies.</p>
+</div>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2></h2>
+<p>We conducted a systematic review investigating the response rate differences between surveys administered by paper-based and those administered using digital platforms. In our review we have found epidemiological studies with a mixed-design using paper and web surveys for data collection.</p>
+<p>In the studies reviewed, our meta-analysis indicates that, there is a small significant response rate difference between paper surveys and web surveys, however, as the studies are substantially heterogenous it is difficult to conclude whether this is a true difference. These finding are very similar to those found in a recently published review looking at the response rate difference between web and other survey methods within public health research (Blumenberg and Barros, 2018), this review studies had an I2 of 99.6% and found traditional survey methods to have 12.9% higher response rate than web surveys. Similarly, another review that is non-health-focused corroborates with these findings, Shih and Fan (2008) found paper surveys to have a better response rate than digital surveys (11.9%) and with an I2 of 98.9%. Furthermore, Manfreda and colleagues (2008), found traditional surveys to have a much better response rate than web surveys by 19%, though, this high difference could be explained by the fact that Manfreda and colleagues did not limit their review to surveys focused on health-related questions.</p>
+<p>Unlike Shih and Fan’ review, we found that features such as incentives, reminders and random assignments did not explain response rate difference paper and digital surveys. This could perhaps be due to the different sample size of studies analysed within both review (29 studies and 14 studies). Based on our qualitative analysis, paper surveys appear to have a higher missing data difference.</p>
+<p>Number of studies reporting this outcome is very low within this review. Since these differences are small and there are no precisions estimates to accompany the difference, it is difficult to conclude any significant differences.</p>
+<p>However, this difference could be plausible as web surveys sometimes have validation features that minimise missing data. This is in line with Belisario et als (2015) review, where they found digital app surveys to have lower missing data than paper questionnaire.</p>
 </div>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
@@ -1532,22 +1634,21 @@ attached base packages:
 
 other attached packages:
 [1] bindrcpp_0.2.2  dplyr_0.7.8     metafor_2.0-0   Matrix_1.2-15  
-[5] meta_4.9-4      readxl_1.2.0    prettydoc_0.2.1
+[5] meta_4.9-4      readxl_1.2.0    knitr_1.21      prettydoc_0.2.1
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0        bindr_0.1.1       knitr_1.21       
- [4] whisker_0.3-2     magrittr_1.5      workflowr_1.1.1  
- [7] tidyselect_0.2.5  lattice_0.20-38   R6_2.3.0         
-[10] rlang_0.3.1       stringr_1.3.1     tools_3.5.2      
-[13] grid_3.5.2        nlme_3.1-137      xfun_0.4         
-[16] R.oo_1.22.0       git2r_0.24.0      htmltools_0.3.6  
-[19] assertthat_0.2.0  yaml_2.2.0        digest_0.6.18    
-[22] rprojroot_1.3-2   tibble_2.0.1      crayon_1.3.4     
-[25] purrr_0.2.5       R.utils_2.7.0     glue_1.3.0       
-[28] evaluate_0.12     rmarkdown_1.11    stringi_1.2.4    
-[31] pillar_1.3.1      compiler_3.5.2    cellranger_1.1.0 
-[34] backports_1.1.3   R.methodsS3_1.7.1 pkgconfig_2.0.2  </code></pre>
-</div>
+ [1] Rcpp_1.0.0        cellranger_1.1.0  compiler_3.5.2   
+ [4] pillar_1.3.1      git2r_0.24.0      highr_0.7        
+ [7] workflowr_1.1.1   bindr_0.1.1       R.methodsS3_1.7.1
+[10] R.utils_2.7.0     tools_3.5.2       digest_0.6.18    
+[13] evaluate_0.12     tibble_2.0.1      nlme_3.1-137     
+[16] lattice_0.20-38   pkgconfig_2.0.2   rlang_0.3.1      
+[19] yaml_2.2.0        xfun_0.4          stringr_1.3.1    
+[22] rprojroot_1.3-2   grid_3.5.2        tidyselect_0.2.5 
+[25] glue_1.3.0        R6_2.3.0          rmarkdown_1.11   
+[28] purrr_0.2.5       magrittr_1.5      whisker_0.3-2    
+[31] backports_1.1.3   htmltools_0.3.6   assertthat_0.2.0 
+[34] stringi_1.2.4     crayon_1.3.4      R.oo_1.22.0      </code></pre>
 </div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -1571,8 +1672,6 @@ footer is added to webpages before the MathJax javascript. -->
 <hr>
 
 
-</div>
-</div>
 
 </div>
 
