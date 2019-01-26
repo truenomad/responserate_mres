@@ -1,24 +1,22 @@
+---
 name: "Responserate_mres"
 output_dir: "../docs"
 navbar:
-  title: "Response Rate Met-analysis"
-  left:
-    - text: "Workflow"
-      href: RR_Meta-analysis.wflow_html
+title: "Response Rate Met-analysis"
+left:
+    - text: "Home"
+      href: index.html
     - text: "About"
       href: about.html
     - text: "License"
       href: license.html
-    - text: "index"
-      href: index.html
-
-
-  right:
+right:
     - icon: fa-github
       href: https://truenomad.github.io/responserate_mres/
 output:
-  workflowr::wflow_html:
-    toc: true
-    toc_float: true
-    theme: cosmo
-    highlight: textmate
+      workflowr::wflow_html:
+      toc: true
+      toc_float: true
+      theme: cosmo
+      highlight: textmate
+---
