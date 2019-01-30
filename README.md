@@ -49,7 +49,9 @@ In order to establish whether digital surveys are any better than paper surveys,
 
 
 ## Deliverables
+* [Markdown report](docs/index.html)
 * [Project book](https://bookdown.org/mohamedayusuf87/SR_Report/)
+
 
 ## Contact
 * Feel free to contact team leads with any questions or if you are interested in contributing!
