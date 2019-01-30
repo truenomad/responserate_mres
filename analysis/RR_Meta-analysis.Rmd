@@ -1,7 +1,6 @@
 ---
 title: "Response Rate Meta-analysis"
 author: "Mohamed"
-date: "22/01/2019"
 output:
   html_document:
     number_sections: yes
@@ -21,6 +20,30 @@ text-align: justify}
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## Abstract
+
+
+__Background__
+
+Recently, epidemiologists have started adopting digital surveys as a method for data collection. However, it is unknow whether these methods are any better than paper-based surveys.
+
+__Objective__
+
+We undertook a systematic review investigating the response rate differences between questionnaires administered by paper-based and those administered using digital platforms to collect exposure and/or outcome data in epidemiological studies.
+
+__Methods__
+
+We searched through the peer-reviewed published literature for mixed-method epidemiological studies that use paper and digital surveys for data collection. We looked through Medline, Web of Science, CINAHL and PsychINFO. Data were extracted and effect size and study variance were calculated. Using this information, a random-effects model was conducted using R program. Additionally, in order to estimate the relationship between response rate and survey features, sub-group analysis was carried out.
+
+__Results__
+
+Eighteen studies were selected, off which five had to be excluded from the meta-analysis as they were influential cases. Based on the random-effects model, the response rate difference was 5.90 (1.59 - 10.23) and the overall study heterogeneity was considerably high (I2 = 95%). Sub-group analysis revealed survey features had no impact on the response rate difference.
+
+__Conclusion__
+
+We conclude that paper surveys a have slightly higher response rate than digital surveys, and that sub-group analysis of study features did not explain this difference.  However, due to the clinically and methodological heterogeneity of the reviewed studies, it is difficult to conclude anything from the meta-analytical findings of this review.
+
 
 ## Introduction 
 
@@ -120,14 +143,19 @@ We have also conducted a group-analysis using a random effects model, with the s
 All analysis were conducted using R statistical program version 3.3.2 (Team, 2013). More specifically, Meta  package (version 4.9-4) (Schwarzer and Schwarzer, 2012)was used for the meta-analysis forest plots. The full R script for the meta-analysis is included in the appendix.
 
 
-## Analysis & Results 
+<style>
+body {
+text-align: justify}
+</style>
 
-### Study selection
-Our literature search provided us with 1,193 citations. Upon screening the abstracts, our list came down to 32 articles. Once the full eligibility criteria were applied, 18 studies were included in the review. Within the list of the full articles excluded from the review, 11 failed to provide non-combined response rates for the survey modes and three of them were on non-epidemiological topics. 
+# Analysis & Results 
 
-### Study characteristics
-Within our included studies, 16 studies were a cross-sectional design and two were a cohort design. All of the studies compared paper surveys with web surveys. One study also compared paper surveys with SMS surveys. For paper surveys, 14 were administered through the post and only 3 were administered face-to-face, whereas, within web surveys, 8 were administered via post, five through e-mail, two by face-to-face and one on an online forum (see table 1).  With regards to study features, majority of studies randomly assigned participants to survey method (67%) and utilised survey reminders (72%), while only 39% of the studies gave out monetary incentives. Study populations variedly greatly between studies, it wasn’t possible to group them in this review. Also, due to differential reporting in response rates per demographics in the reviewed studies, it was not possible to breakdown down response rate per a demography.
+## Study selection
+Our literature search provided us with 1,193 citations. Upon screening the abstracts, this list came down to 32 articles. Once the full eligibility criteria were applied, 18 studies were included in the review. Within the list of the full articles excluded from the review, 11 failed to provide non-combined response rates for the survey modes and three of them were on non-epidemiological topics.
 
+
+## Study characteristics
+Within our included studies, 16 studies were a cross-sectional design and two were a cohort design. All of the studies compared paper surveys with web surveys. One study also compared paper surveys with SMS surveys. For paper surveys, 14 were administered through the post and only 3 were administered face-to-face, whereas, within web surveys, 8 were administered via post, five through e-mail, two by face-to-face and one on an online forum (see table 1).  With regards to study features, the majority of studies randomly assigned participants to survey method (67%) and utilised survey reminders (72%), while only 39% of the studies gave out monetary incentives. Study populations variedly greatly between studies, it wasn’t possible to group them in this review. Also, due to differential reporting in response rates per demographics in the reviewed studies, it was not possible to breakdown down response rate per demography. See table 2 in Appendix 4 for the full study characteristics.
 
 
 | Characteristics                          |  Number of studies (%)|
@@ -165,16 +193,14 @@ Within our included studies, 16 studies were a cross-sectional design and two we
                         
 Table 1: A descriptive summary of the characteristics of the studies reviewed 
 
+## Quality Appraisal 
+The quality of the studies ranged between fair and good. One study had poor quality, thirteen studies had fair quality and four studies were of good quality. The main risk of bias was due to the lack outcome blinding and assessment of exposure prior to measurement of outcome. The study with poor quality (McCabe, 2004) was excluded from the review as it below our cut off margin. Table 3 in Appendix 5 includes the quality assessment of the studies reviewed. 
 
-### Quality Appraisal 
-The quality of the studies averaged between fair and good. One study had poor quality, eight studies had fair quality and three studies were of good quality. The risk of bias was due to some of the items that weren’t relevant to all study designs, items that were relevant to cohort studies. Such as outcome blinding and assessment of exposure prior to measurement of outcome. The study with poor quality (McCabe 04) was excluded from the review as it below our cut off margin. Table 3 includes the quality assessment of the studies reviewed. 
-
-
-
-### Preparation for data synthesis
+## Met-analysis
+## Preparation for data synthesis
 Here we will install and run all the relelvant packages as well as upload our data.
 
-#### Install dependencies
+### Install dependencies and data 
 ```{r packages & data, message=FALSE, warning=TRUE, paged.print=TRUE}
 
 # Install dependencces 
@@ -184,18 +210,15 @@ library(readxl)
 library(meta)
 library(metafor)
 library(dplyr)
-```
-
-#### Load the data into R
-```{r}
 
 # Import the data
-RR_data <- readxl::read_xlsx("/Users/mohamedyusuf/R/Epidemiology in R /MRes/Responserate_mres/data/RR_data_3.xlsx")
-
+RR_data <- readxl::read_xlsx("data/RR_data_3.xlsx")
 
 ```
 
-#### Label some of the categorical data
+### Labeling
+
+Label some of the categorical data
 ```{r}
 # make lables for the incentive levels
 RR_data$incentives <- factor(RR_data$incentives,
@@ -216,7 +239,7 @@ labels = c("Randomly Assigned", "Not Randomly Assigned"))
 ### Random Effects Models 
 Here we will create effect size and sample variance for the model. After that we will input these variables into the model.
 
-#### Build Random effects model using the metagen function
+Build Random effects model using the metagen function
 ```{r}
 # effect size 
 yi <-  RR_data$rr_diff
@@ -237,7 +260,7 @@ RE_model<-metagen(yi,
               sm="SMD")
 ```
 
-#### Forest Plot
+### Forest Plot
 We will now produce a forest plot using our RE model and then look at the statistical output of RE Model
 ```{r, fig.height= 6, fig.width= 10, fig.cap=" Figure 2: The dashed vertical line represents the combined survey mode effect (0). The RR (Response rate) difference (12.30; 95% confidence interval = 4.80 to 19.80). TE represents study effect size and seTE represents its variance."}
 
@@ -269,12 +292,12 @@ forest(RE_model,
 summary(RE_model)
 
 ```
-A random effects meta-analysis conducted, giving an overall weighted response rate difference of 12.30% (95% CI, 4.80 to 19.80), between paper and online surveys. However, the heterogeneity of the studies included was very significant with a Q score of 17, 397 (I2 = 100%; p = 0.00), See figure 2 This substantial heterogeneity warranted further investigation. 
+A random effects meta-analysis conducted, giving an overall weighted response rate difference of 12.30% (95% CI, 4.80 to 19.80), between paper and online surveys. However, the heterogeneity of the studies included was very significant with a Q score of 17, 397 (`I^2` = 100%; p = 0.00), See figure 2 This substantial heterogeneity warranted further investigation. 
 
 ### Between-study Heterogeneity
 To detect influential studies that may be pushing the effect of our analysis into one direction. We applied Viechtbauer and Cheung’s (2010) method for detecting statistical outliers. This involved categorising studies whose confidence interval did not overlap with the overall effect confidence interval as outliers (Viechtbauer and Cheung, 2010). 
 
-#### Detecting outliers
+### Detecting outliers
 In order to do this we must create an R package that aids us in spotting these outliers based on there confidence interval. 
 ```{r}
 # make a function to aid detection outliers
@@ -295,8 +318,8 @@ spot.outliers.random(data=RE_model)
 ```
 To detect outliers that may be pushing the effect of our analysis into one direction. We applied Viechtbauer and Cheung’s (2010) method for detecting statistical outliers. This involved categorising studies whose confidence interval did not overlap with the overall effect confidence interval as outliers. From this, we found Mlikotic et al, 2016, Palmen et al, 2015, Le et al, 2018 and Kallmen et al, 2011 to stand out greatly as their lower-bound CI was far greater than the upper bound CI of our pooled effect size 
 
-#### Influence analysis
-```{r, fig.height= 6, fig.width= 10, fig.cap= c("Figure 3: Leave-one-out analysis - the plot is ordered by effect size (low to high). The top four studies are the most influential and also, they are the same studies as our outliers.", "Figure 4: Baujat plot inspecting overall heterogeneity. The x axis represents the contribution of the studies to the overall heterogeneity, while the y axis represents the influence that the studies have on the overall heterogeneity. The most influential and heterogenous studies appear in the top right.")}
+### Influence analysis
+```{r, fig.height= 6, fig.width= 10, fig.cap= c("Figure 3: Leave-one-out analysis - the plot is ordered by effect size (low to high). The top four studies are the most influential and also, they are the same studies as our outliers.","Figure 4: Baujat plot inspecting overall heterogeneity. The x-axis represents the contribution of the studies to the overall heterogeneity, while the y-axis represents the influence that the studies have on the overall heterogeneity. The most influential and heterogenous studies appear in the topright.")}
 # make an influence function 
 
 influence.analysis<-function(data, method.tau, hakn){
@@ -354,9 +377,9 @@ In addition to the leave-one-out analysis, a diagnostic plot called Baujat plot 
 
 All of the tests above, point towards the same direction. They highlight that the following five studies; Mlikotic et al, 2016, Le et al, 2018, Kallmen et al, 2011, Palmen et al, 2015 and Sinclair et al, 2012 are most likely outlier that may be influencing our effects size and precision estimates. As such, they were excluded, and a sensitivity analysis was conducted.  
 
-#### Sensitivity analysis
+### Sensitivity analysis
 We will now conduct a sensitivity analysis in which the five identified outlier studies are excluded.
-```{r, fig.height= 6, fig.width= 10, fig.cap= "Figure 5: Meta-analysis with the five outlier studies omitted. The dashed vertical line represents the combined survey mode effect (0). The RR (Response rate) difference (5.90; 95% confidence interval = 1.59 to 10.23). TE represents study effect size and seTE represents its variance."}
+```{r, fig.height= 6, fig.width= 10, fig.cap= "Figure 5:Meta-analysis with the five outlier studies omitted. The dashed vertical line represents the combined survey mode effect (0). The RR (Response rate) difference (5.90; 95% confidence interval = 1.59 to 10.23). TE represents study effect size and seTE represents its variance."}
 
 # remove outliers
 RE.model.outliers<-update.meta(RE_model,
@@ -388,16 +411,54 @@ forest(RE.model.outliers,
 # RE Model ouput
 summary(RE.model.outliers)
 ```
-After dropping the five studies, the random effects meta-analysis was reproduced. The heterogeneity of the studies included is still very significant (I2 = 95%; p = 0.01). However, the heterogeneity has changed due to the omission of the outlier studies, prior to the omission the Q score was 17, 397, after the omission the q score has dropped down to 239.85. Within forest plot, one study favoured online surveys, two were neutral in their effect size, and the rest of the reviewed studies favoured paper surveys – illustrated in figure 5.
+After dropping the five studies, the random effects meta-analysis was reproduced. The heterogeneity of the studies included was still very significant (`I^2` = 95%; p = 0.01). However, the heterogeneity has changed due to the omission of the outlier studies, prior to the omission the Q score was 17, 397, after the omission the q score has dropped down to 239.85. 
 
-In addition to this, the new updated model has an effect size of 5.9% and a 95% confidence interval between 3.77 and 5.31; this confidence interval is much narrower than the confidence interval of the previous interval, suggesting that the previous studies were inflating the effect size.
+The response rate difference was 5.90 (95% confidence interval, 1.59 to 10.23), still favouring paper savours over digital surveys. Within forest plot, one study favoured online surveys, two were neutral in their effect size, and the rest of the reviewed studies favoured paper surveys – illustrated in figure 5.
 
-### Subgroup analysis
+
+## Publication bias
+Here we create a funnel plot and see if our results are impacted by publication
+```{r, fig.height= 6, fig.width= 10, fig.cap= "Figure 6: A funnel plot with two axes: the y-axis showing the Standard Error (SE) of each study. Studies with smaller SE are plotted at the top of the y-axis and those with larger effect sizes plotted at the bottom; the x-axis is the effect size of each study."}
+
+
+# make a funnel plot 
+funnel(RE.model.outliers, xlab="Hedges' g", studlab = T)
+
+# Creat e function for eggers function
+
+eggers.test<-function(data){
+  
+  data<-data
+  eggers<-metabias(data)
+  intercept<-as.numeric(eggers$estimate[1])
+  intercept<-round(intercept,digits=3)
+  se.intercept<-eggers$estimate[2]
+  lower.intercept<-as.numeric(intercept-1.96*se.intercept)
+  lower.intercept<-round(lower.intercept,digits = 2)
+  higher.intercept<-as.numeric(intercept+1.96*se.intercept)
+  higher.intercept<-round(higher.intercept,digits = 2)
+  ci.intercept<-paste(lower.intercept,"-",higher.intercept)
+  ci.intercept<-gsub(" ", "", ci.intercept, fixed = TRUE)
+  intercept.pval<-as.numeric(eggers$p.value)
+  intercept.pval<-round(intercept.pval,digits=5)
+  eggers.output<-data.frame(intercept,ci.intercept, intercept.pval)
+  names(eggers.output)<-c("intercept","95%CI","p-value")
+  title<-"Results of Egger's test of the intercept"
+  print(title)
+  print(eggers.output)
+}
+
+eggers.test(RE.model.outliers)
+
+```
+Based on the funnel plot findings, there is some symmetry in the reviewed studies effect sizes (figure 6). This is further corroborated by Egger’ test which has an intercept of -1.6 (95%, -6.7 to 3.5), with an overall p-value of 0.55. From this we can rule out the likelihood of publication bias from our findings.
+
+## Subgroup analysis
 Now we want to know study specfic features and effects on our meta-analysis. In order to do this we will do subgroup analysis.
 
-#### Type of surveys
+### Type of surveys
 Analysis looking at whether the type of study comparisons has impact on the effect size
-```{r, fig.height= 6, fig.width= 10, fig.cap= "Figure 6: Sub-group analysis of the type surveys compared. Both groups favour paper surveys but differ in overall effect size. TE represents study effect size and seTE represents its variance."}
+```{r, fig.height= 6, fig.width= 10, fig.cap= "Figure 7: Sub-group analysis of the type surveys compared. Both groups favour paper surveys but differ in overall effect size. TE represents study effect size and seTE represents its variance."}
 
 # build a REM for between-subgroup-differences in random assignments
 type.subgroup<-update.meta(RE.model.outliers, 
@@ -434,10 +495,10 @@ forest(type.subgroup,
 # RE Model ouput
 summary(type.subgroup)
 ```
-From our included studies, one study compared paper surveys with SMS surveys, while the rest compared paper surveys with web surveys. The two groups varied drastically with a Q of 9.36 and p-value of 0.0022, paper versus web group has a response rate difference of 5.13 (95% CI 0.78 – 9.51) while the paper versus SMS has a response rate of 15.2 (95% 10.06 – 20.34). However, despite the difference it is difficult to conclude anything because of the small number of studies in the paper versus SMS group (figure 6).
+From our included studies, one study compared paper surveys with SMS surveys, while the rest compared paper surveys with web surveys. The two groups varied drastically with a Q of 9.36 and p-value of 0.0022, paper versus web group has a response rate difference of 5.13 (95% CI 0.78 – 9.51) while the paper versus SMS has a response rate of 15.2 (95% 10.06 – 20.34). However, despite the difference, it is difficult to conclude anything because of the small number of studies in the paper versus SMS group (figure 6).
 
-#### Random assignment
-```{r, fig.height= 6, fig.width= 10, fig.cap="Figure 7: Sub-group analysis of random assignment use. Both groups favour paper surveys but differ in overall effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance."}
+### Random assignment
+```{r, fig.height= 6, fig.width= 10, fig.cap="Figure 8: Sub-group analysis of random assignment use. Both groups favour paper surveys but differ in overall effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance."}
 
 # build a REM for between-subgroup-differences in random assignments
 rand.subgroup<-update.meta(RE.model.outliers, 
@@ -473,8 +534,8 @@ summary(rand.subgroup)
 ```
 As seen in figure 7, studies that randomly assigned individuals into either paper or digital surveys had a mean response rate difference of 7.50 (95% CI, 2.03 to 12.97), whereas the studies that did not utilise the random assignment feature had a response rate difference of 3.37 (95% CI, 6.53 to 13.28). Both groups had an overall effect size of 5.91 (95% CI, 1.59 to 10.23), though, there was no significant difference between the two groups (Q = 0.94, p= 0.339), hence random assignment does not explain the difference in response rate between the two survey methods.
 
-#### Incentives
-```{r, fig.height= 6, fig.width= 10, fig.cap="Figure 8: Sub-group analysis of monetary incentive use. Both groups favour paper surveys but differ in effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance."}
+### Incentives
+```{r, fig.height= 6, fig.width= 10, fig.cap="Figure 9: Sub-group analysis of monetary incentive use. Both groups favour paper surveys but differ in effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance."}
 
 # build a REM for between-subgroup-differences in random assignments
 incent.subgroup<-update.meta(RE.model.outliers, 
@@ -507,10 +568,10 @@ forest(incent.subgroup,
 # RE Model ouput
 summary(incent.subgroup)
 ```
-Studies that used reminders had a response rate difference of 7.47 (95% CI; 1.45 to 13.49) and studies that did not use reminders had a difference of 2.55 (95% CI; 1.59 to 10.23) – see figure 9 of full breakdown. Use of reminders does not impact overall effect size, there was no significant difference between two groups (Q = 2.23; p=0.135).
+Studies that offered monetary incentives had response rate difference of 2.29 (95% CI, -8.67 to 13.24), studies that did not offer incentives had a response rate of 7.66 (95% CI, 2.89 to 12.42) – figure 8. There was no significant difference between the studies (Q = 1.47; p =0.226), indicating that incentives that use of incentives do not affect response rate difference between paper and digital surveys.
 
-#### Reminder
-```{r, fig.height= 6, fig.width= 10, "Figure 9: Sub-group analysis of surveys reminders. Both groups favour paper surveys but differ in effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance."}
+### Reminder
+```{r, fig.height= 6, fig.width= 10, "Figure 10: Sub-group analysis of surveys reminders. Both groups favour paper surveys but differ in effect size, though this difference is not significant. TE represents study effect size and seTE represents its variance."}
 
 # build a REM for between-subgroup-differences in random assignments
 remin.subgroup<-update.meta(RE.model.outliers, 
@@ -541,9 +602,9 @@ summary(remin.subgroup)
 ```
 Studies that used reminders had a response rate difference of 7.47 (95% CI; 1.45 to 13.49) and studies that did not use reminders had a difference of 2.55 (95% CI; 1.59 to 10.23) – see figure 9 of full breakdown. Use of reminders does not impact overall effect size, there was no significant difference between two groups (Q = 2.23; p=0.135).
 
-#### Year
+### Year
 Here will use metaregression to really see if publication year impacts our effect size
-```{r, fig.height= 6, fig.width= 10, fig.cap= "Figure 10: The relationship between response rate difference and publication year."}
+```{r, fig.height= 6, fig.width= 10, fig.cap= "Figure 11: The relationship between response rate difference and publication year."}
 
 # linear model for year
 year.metareg<-metareg(RE.model.outliers, year)
@@ -559,7 +620,19 @@ bubble(year.metareg,
        studlab = F)
 
 ```
-To assess whether year of study publication had impact on response rate difference, a meta-regression was carried. As displayed in figure 10, there is a negative relationship with year of publication and response rate difference, implying that response rate difference dropping slightly as years progress -0.56 (95% CI, -1.44 to 0.34). However, since the confidence interval crosses the zero mark, it is not significant. As such, year of publication was not associated with response rate difference.
+To assess whether the year of study publication had an impact on response rate difference, a meta-regression was carried. As displayed in figure 10, there is a negative relationship with the year of publication and response rate difference, implying that response rate difference dropping slightly as years progress -0.56 (95% CI, -1.44 to 0.34). However, since the confidence interval crosses the zero mark, it is not significant. As such, year of publication was not associated with response rate difference.
+
+## Further analysis
+
+### Response rate by Survey type
+
+All of our studies look at paper and web surveys, within them one study also looked at SMS. Overall, SMS had the highest response rate, though this is not conclusive as only one study looked at this type of survey, then Paper survey was the second highest while web survey had least response rate (table 4)
+
+|Survey types| N | Response Rate (%)  |
+|:---|:--:|:--:|
+|Paper|18|66|
+|Web|18|54|
+|SMS|1|88|
 
 ### Missing data difference
 
@@ -597,28 +670,156 @@ Table 5: Unweighted mean response rate difference by administration method
 
 
 
-### Publication bias
+# Discussion
 
-#### Funnel plot 
-Here will see if our results are impacted by publication
-```{r, fig.height= 6, fig.width= 10}
+We conducted a systematic review investigating the response rate differences within epidemiological studies with a mixed-design using paper and web surveys for data collection. 
 
-# make a funnel plot 
-funnel(RE.model.outliers, xlab="Hedges' g", studlab = T)
-```
-We can see that some studies appear to fall outside of teh funnel, implying that there is a high likelyhood of publication bias within our pool of studies.
+In the studies reviewed, our meta-analysis indicates that there is a small significant response rate difference between paper surveys and web surveys, however, as the studies are substantially heterogeneous it is difficult to conclude whether this is a true difference. 
 
-## 
+These finding are very similar to those found in a recently published review looking at the response rate difference between web and other survey methods within public health research (C. Blumenberg and A. J. D. Barros, 2018), this review studies had an I2 of 99.6% and found traditional survey methods to have a 12.9% higher response rate than web surveys. Similarly, another review that is non-health-focused corroborates with these findings, Shih and Fan (2008) found paper surveys to have a better response rate than digital surveys (11.9%) and with an I2 of 98.9%. Furthermore, Manfreda and colleagues (2008), found traditional surveys to have a much better response rate than web surveys by 19%, though, this high difference could be explained by the fact that Manfreda and colleagues did not limit their review to surveys focused on health-related questions. 
 
-We conducted a systematic review investigating the response rate differences between surveys administered by paper-based and those administered using digital platforms. In our review we have found epidemiological studies with a mixed-design using paper and web surveys for data collection. 
+Contrary to Shih and Fan’ review, we found that features such as incentives, reminders, random assignments and year of publication did not explain the response rate difference between paper and digital surveys. This could perhaps be due to the different sample size of studies analysed within both reviews; this review examined 14 studies while Shih and Fan’ review examine 39 studies. 
 
-In the studies reviewed, our meta-analysis indicates that, there is a small significant response rate difference between paper surveys and web surveys, however, as the studies are substantially heterogenous it is difficult to conclude whether this is a true difference. These finding are very similar to those found in a recently published review looking at the response rate difference between web and other survey methods within public health research (Blumenberg and Barros, 2018), this review studies had an I2 of 99.6% and found traditional survey methods to have 12.9% higher response rate than web surveys. Similarly, another review that is non-health-focused corroborates with these findings, Shih and Fan (2008) found paper surveys to have a better response rate than digital surveys (11.9%) and with an I2 of 98.9%. Furthermore, Manfreda and colleagues (2008), found traditional surveys to have a much better response rate than web surveys by 19%, though, this high difference could be explained by the fact that Manfreda and colleagues did not limit their review to surveys focused on health-related questions. 
+Based on our qualitative analysis, paper surveys appear to have a higher missing data difference. Since the number of studies reporting this outcome is very low within our pool of studies. Since these differences are small and there are no precisions estimates to accompany the difference, it is difficult to conclude any significant differences. However, this difference could be plausible as web surveys sometimes have validation features that enable them to minimise missing data. This is in line with Belisario et al’ (2015) review, where they found digital app surveys to have lower missing data than the paper questionnaire. In addition to this, survey administration methods, which was conducted qualitatively, reveals that surveys that were administrated face-to-face had a slightly lower response rate than surveys that were administered via mail and agrees with the findings of Nulty (2008). Such findings might be 
 
-Unlike Shih and Fan’ review, we found that features such as incentives, reminders and random assignments did not explain response rate difference paper and digital surveys. This could perhaps be due to the different sample size of studies analysed within both review (29 studies and 14 studies). Based on our qualitative analysis, paper surveys appear to have a higher missing data difference.
+## Strength and Weakness
 
-Number of studies reporting this outcome is very low within this review. 
-Since these differences are small and there are no precisions estimates to accompany the difference, it is difficult to conclude any significant differences.
 
-However, this difference could be plausible as web surveys sometimes have validation features that minimise missing data. This is in line with Belisario et als (2015) review, where they found digital app surveys to have lower missing data than paper questionnaire.
+When this review was initiated, it hoped to be the first review looking at the response rate difference between epidemiological studies using paper and web surveys for data collection. However, within the process of completing this review, a new review that was very close to this current review was published (C. Blumenberg and A. J. Barros, 2018). Nonetheless, Blumenberg and Barros (2018) look at the response rate difference between web surveys against other traditional survey methods such as mail, telephone and face-to-face), our review more specifically looks at the response rate between paper surveys and digital surveys i.e. web, apps, e-mail and SMS. In addition to these subtle differences, Blumenberg and Barros failed to pick up 12 relevant studies that we have reviewed in this paper. Another key strength of our review is that it conducts sub-group analysis in hopes of understanding whether study features account for response rate difference.
+
+This study has several limitations. Firstly, due to clinical and methodological diversity, the reviewed studies were significantly heterogeneous.  For example, our studies varied greatly in research questions, samples and sample sizes; some studies looked alcohol and tobacco use in school children while others looked at the quality of life in women with a history of breast cancer, additionally, sample size ranged between 48 participants to 26,500. Such heterogeneity makes it very difficult to conclude any meaningful results from our meta-analysis.
+
+ Secondly, in addition to the diversity of the studied populations, the studies greatly varied in their reporting of the populations, for this reason, it was not possible to extract the relevant data to examine the response rate difference per population. Lack of population estimates limits the interpretation of the findings in this review.  In particular, the potential for selection bias as we already know that digital surveys are associated with non-coverage and non-response bias in certain populations such as the elderly and those who socio-economically deprived (M. P. Couper et al., 2007). And finally, only one reviewer reviewed, appraised and extracted the data. This could lead to a single reviewer bias, which could error and misclassification of studies and their outcomes.
+
+## Conclusion
+
+Our review finds that response rate difference favours paper surveys over digital surveys, and that sub-group analysis of study features did not explain this difference. Though, it is difficult to conclude anything from this as the reviewed studies were clinically and methodological heterogenous.  
+
+Missing data appears to favour digital surveys over paper surveys, this is in line with the current body of literature. Due to additional features such as lower costs, ease of data collection, and automation of results coding, digital surveys could serve as an effective data collection strategy for epidemiological surveys.
+
+However, due to partial and inconsistent study reporting, an important argument against digital surveys, which is population-specific selection bias, could not be examined within this systematic review. As such, before any conclusive suggestions can be made on the use of digital surveys, there needs to be a more comparable and robust epidemiological research exploring these data collection methods within various populations.
+
+<style>
+body {
+text-align: justify}
+</style>
+
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+Akl, E. A., Maroun, N., Klocke, R. A., Montori, V. and Schünemann, H. J. J. J. o. C. E. (2005) 'Electronic mail was not better than postal mail for surveying residents and faculty.' 58(4) pp. 425-429.
+
+Altman, D. G. and Bland, J. M. (2007) 'Missing data.' Bmj, 334(7590) pp. 424-424.
+
+Armstrong, B. K., White, E. and Saracci, R. (1994) 'Principles of exposure measurement in epidemiology. monographs on epidemiolgy and bioestatistics.' Principles of exposure measurement in epidemiology: monographs on epidemiolgy and bioestatistics, 
+
+Baujat, B., Mahé, C., Pignon, J. P. and Hill, C. (2002) 'A graphical method for exploring heterogeneity in meta‐analyses: application to a meta‐analysis of 65 trials.' Statistics in medicine, 21(18) pp. 2641-2652.
+
+Belisario, J. S. M., Jamsek, J., Huckvale, K., O'Donoghue, J., Morrison, C. P. and Car, J. (2015) 'Comparison of self-administered survey questionnaire responses collected using mobile apps versus other methods.' 
+
+Blumenberg, C. and Barros, A. J. (2018) 'Response rate differences between web and alternative data collection methods for public health research: a systematic review of the literature.' International journal of public health, 63 pp. 765-773.
+
+Blumenberg, C. and Barros, A. J. D. (2018) 'Response rate differences between web and alternative data collection methods for public health research: A systematic review of the literature.' International Journal of Public Health, 
+
+Brodie, M., Flournoy, R. E., Altman, D. E., Blendon, R. J., Benson, J. M. and Rosenbaum, M. D. (2000) 'Health information, the Internet, and the digital divide.' Health affairs, 19(6) pp. 255-265.
+
+Chang, B. L., Bakken, S., Brown, S. S., Houston, T. K., Kreps, G. L., Kukafka, R., Safran, C. and Stavri, P. Z. J. J. o. t. A. M. I. A. (2004) 'Bridging the digital divide: reaching vulnerable populations.' 11(6) pp. 448-457.
+
+Church, A. H. (1993) 'Estimating the effect of incentives on mail survey response rates: A meta-analysis.' Public opinion quarterly, 57(1) pp. 62-79.
+
+Cook, C., Heath, F. and Thompson, R. L. (2000) 'A meta-analysis of response rates in web-or internet-based surveys.' Educational and psychological measurement, 60(6) pp. 821-836.
+
+Couper, M. P., Kapteyn, A., Schonlau, M. and Winter, J. (2007) 'Noncoverage and nonresponse in an Internet survey.' Social Science Research, 36(1) pp. 131-148.
+
+Couper, M. P. J. T. P. O. Q. (2000) 'Web surveys: A review of issues and approaches.' 64(4) pp. 464-494.
+
+DerSimonian, R. and Laird, N. (1986) 'Meta-analysis in clinical trials.' Controlled clinical trials, 7(3) pp. 177-188.
+
+Dillman, D. A. (2011) Mail and Internet surveys: The tailored design method--2007 Update with new Internet, visual, and mixed-mode guide. John Wiley & Sons.
+
+Duncan, D. F., White, J. B. and Nicholson, T. (2003) 'Using internet-based surveys to reach hidden populations: Case of nonabusive illicit drug users.' American journal of health behavior, 27(3) pp. 208-218.
+
+Ebert, J. F., Huibers, L., Christensen, B. and Christensen, M. B. (2018) 'or web-based questionnaire invitations as a method for data collection: cross-sectional comparative study of differences in response rate, completeness of data, and financial cost.' Journal of medical Internet research, 20(1)
+
+Ekman, A. and Litton, J.-E. J. E. j. o. e. (2007) 'New times, new needs; e-epidemiology.' 22(5) pp. 285-292.
+
+Fan, W. and Yan, Z. J. C. i. h. b. (2010) 'Factors affecting response rates of the web survey: A systematic review.' 26(2) pp. 132-139.
+
+Ferrie, J. E., Kivimäki, M., Singh-Manoux, A., Shortt, A., Martikainen, P., Head, J., Marmot, M., Gimeno, D., De Vogli, R. and Elovainio, M. J. I. j. o. e. (2009) 'Non-response to baseline, non-response to follow-up and mortality in the Whitehall II cohort.' 38(3) pp. 831-837.
+
+Fox, R. J., Crask, M. R. and Kim, J. (1988) 'Mail survey response rate: A meta-analysis of selected techniques for inducing response.' Public Opinion Quarterly, 52(4) pp. 467-491.
+
+Friedman, T. (2006) The World is Flat: The Globalized World in the Twenty-First century Penguin Books. London.
+
+Gernsbacher, M. A. J. D. p. (2014) 'Internet-based communication.' 51(5-6) pp. 359-373.
+
+Griffis, S. E., Goldsby, T. J. and Cooper, M. J. J. o. B. L. (2003) 'Web‐based and mail surveys: a comparison of response, data, and cost.' 24(2) pp. 237-258.
+
+Guidry, K. R. (2014) 'Non-response bias on Web-based surveys as influenced by the digital divide and participation gap.' 
+
+Howe, L. D., Tilling, K., Galobardes, B. and Lawlor, D. A. (2013) 'Loss to follow-up in cohort studies: bias in estimates of socioeconomic inequalities.' Epidemiology (Cambridge, Mass.), 24(1) p. 1.
+
+Hox, J. J. and De Leeuw, E. D. (1994) 'A comparison of nonresponse in mail, telephone, and face-to-face surveys.' Quality and Quantity, 28(4) pp. 329-344.
+
+Immonen, M. and Sintonen, S. (2015) 'Evolution of technology perceptions over time.' Information Technology & People, 28(3) pp. 589-606.
+
+Janghorban, R., Roudsari, R. L. and Taghipour, A. (2014) 'Skype interviewing: The new generation of online synchronous interview in qualitative research.' International journal of qualitative studies on health and well-being, 9(1) p. 24152.
+
+Kongsved, S. M., Basnov, M., Holm-Christensen, K. and Hjollund, N. H. J. J. o. m. I. r. (2007) 'Response rate and completeness of questionnaires: a randomized study of Internet versus paper-and-pencil versions.' 9(3)
+
+Kroth, P. J., McPherson, L., Leverence, R., Pace, W., Daniels, E., Rhyne, R. L., Williams, R. L. and Medicine, P. N. C. J. T. A. o. F. (2009) 'Combining web-based and mail surveys improves response rates: a PBRN study from PRIME Net.' 7(3) pp. 245-248.
+
+Källmén, H., Wennberg, P., Leifman, H., Bergman, H. and Berman, A. H. (2011) 'Alcohol habits in Sweden during 1997–2009 with particular focus on 2005 and 2009, assessed with the AUDIT: a repeated cross-sectional study.' European addiction research, 17(2) pp. 90-96.
+
+Le, T. T. K., Tran, T. T. B., Ho, H. T. M., Vu, A. T. L. and Lopata, A. L. (2018) 'Prevalence of food allergy in Vietnam: comparison of web-based with traditional paper-based survey.' World Allergy Organization Journal, 11, Jul,
+
+Liberati, A., Altman, D. G., Tetzlaff, J., Mulrow, C., Gøtzsche, P. C., Ioannidis, J. P. A., Clarke, M., Devereaux, P. J., Kleijnen, J. and Moher, D. (2009) 'The PRISMA statement for reporting systematic reviews and meta-analyses of studies that evaluate healthcare interventions: explanation and elaboration.' BMJ, 339
+
+Lupattelli, A., Spigset, O., Twigg, M. J., Zagorodnikova, K., Mårdby, A.-C., Moretti, M. E., Drozd, M., Panchaud, A., Hämeen-Anttila, K. and Rieutord, A. (2014) 'Medication use in pregnancy: a cross-sectional, multinational web-based study.' BMJ open, 4(2) p. e004365.
+
+Maass, S. W. M. C., Roorda, C., Berendsen, A. J., Verhaak, P. F. M. and de Bock, G. H. (2015) 'The prevalence of long-term symptoms of depression and anxiety after breast cancer treatment: A systematic review.' Maturitas, 82(1), 2015/09/01/, pp. 100-108.
+
+Manfreda, K. L., Berzelak, J., Vehovar, V., Bosnjak, M. and Haas, I. (2008) 'Web surveys versus other survey modes: A meta-analysis comparing response rates.' International Journal of Market Research, 50(1) pp. 79-104.
+
+Mathy, R. M., Schillace, M., Coleman, S. M., Berquist, B. E. J. C. and Behavior. (2002) 'Methodological rigor with Internet samples: New ways to reach underrepresented populations.' 5(3) pp. 253-266.
+
+McCabe, S. E. (2004) 'Comparison of web and mail surveys in collecting illicit drug use data: A randomized experiment.' Journal of Drug Education, 34(1) pp. 61-72.
+
+Mlikotic, R., Parker, B. and Rajapakshe, R. (2016) 'Assessing the effects of participant preference and demographics in the usage of web-based survey questionnaires by women attending screening mammography in British Columbia.' Journal of medical Internet research, 18(3)
+
+Montori, V. M., Wilczynski, N. L., Morgan, D. and Haynes, R. B. (2005) 'Optimal search strategies for retrieving systematic reviews from Medline: analytical survey.' Bmj, 330(7482) p. 68.
+
+Nulty, D. D. (2008) 'The adequacy of response rates to online and paper surveys: what can be done?' Assessment & evaluation in higher education, 33(3) pp. 301-314.
+
+Palmen, L. N., Schrier, J. C., Scholten, R., Jansen, J. H. and Koëter, S. (2016) 'Is it too early to move to full electronic PROM data collection?: A randomized controlled trial comparing PROM's after hallux valgus captured by e-mail, traditional mail and telephone.' Foot and Ankle Surgery, 22(1) pp. 46-49.
+
+Pirus, C., Leridon, H. and Wiles-Portier, E. J. P. (2010) 'Large child cohort studies across the world.' 65(4) pp. 575-629.
+
+Prensky, M. (2001) 'Digital natives, digital immigrants part 1.' On the horizon, 9(5) pp. 1-6.
+
+Rothman, K. J., Greenland, S. and Lash, T. L. (2008) 'Modern epidemiology.' 
+
+Schwarzer, G. and Schwarzer, M. G. (2012) 'Package ‘meta’.' The R Foundation for Statistical Computing, 9
+
+Shih, T.-H. and Fan, X. (2008) 'Comparing response rates from web and mail surveys: A meta-analysis.' Field methods, 20(3) pp. 249-271.
+
+Sinclair, M., O'Toole, J., Malawaraarachchi, M. and Leder, K. (2012) 'Comparison of response rates and cost-effectiveness for a community-based survey: postal, internet and telephone modes with generic or personalised recruitment approaches.' Bmc Medical Research Methodology, 12, Aug,
+
+Slottje, P., Yzermans, C. J., Korevaar, J. C., Hooiveld, M. and Vermeulen, R. C. (2014) 'The population-based occupational and environmental health prospective cohort study (AMIGO) in the Netherlands.' BMJ open, 4(11) p. e005858.
+
+Team, R. C. (2013) 'R: A language and environment for statistical computing.' 
+
+Turner, C., Bain, C., Schluter, P. J., Yorkston, E., Bogossian, F., McClure, R., Huntington, A. and Group, N. a. M. e.-C. (2008) 'Cohort Profile: The Nurses and Midwives e-Cohort Study—a novel electronic longitudinal study.' International Journal of Epidemiology, 38(1) pp. 53-60.
+
+Van Gelder, M. M., Bretveld, R. W. and Roeleveld, N. (2010) 'Web-based questionnaires: the future in epidemiology?' American journal of epidemiology, 172(11) pp. 1292-1298.
+
+Viechtbauer, W. and Cheung, M. W. L. (2010) 'Outlier and influence diagnostics for meta‐analysis.' Research synthesis methods, 1(2) pp. 112-125.
+
+Wright, K. B. (2005) 'Researching Internet-Based Populations: Advantages and Disadvantages of Online Survey Research, Online Questionnaire Authoring Software Packages, and Web Survey Services.' Journal of Computer-Mediated Communication, 10(3) pp. JCMC1034-JCMC1034.
+
+Yammarino, F. J., Skinner, S. J. and Childers, T. L. (1991) 'Understanding mail survey response behavior a meta-analysis.' Public Opinion Quarterly, 55(4) pp. 613-639.
+
 
 
