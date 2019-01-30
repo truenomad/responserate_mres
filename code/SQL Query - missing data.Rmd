@@ -1,0 +1,184 @@
+---
+title: "SQL Query - missing data
+output: html_notebook
+---
+
+# Get essentials 
+
+```{r}
+library(sqldf)
+
+RR_data <-readxl::read_xlsx("data/RR_data_3.xlsx")
+
+```
+
+# Missing data
+
+```{r}
+
+# paper surveys 
+
+sqldf("
+SELECT AVG(paper_missing)
+FROM RR_data;
+") 
+      
+# web surveys
+sqldf("
+SELECT AVG(dig_missing)
+FROM RR_data;
+")
+      
+```
+
+Paper surveys have an avergae of 21% missing data while web surveys have an avergae of 7% data.
+
+
+# Missing data per feature - paper surveys 
+
+## Missing data for random assignment
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(paper_missing)
+FROM RR_data 
+WHERE rand_assign = 'Yes';
+")
+    
+# No  
+sqldf("
+SELECT AVG(paper_missing)
+FROM RR_data 
+WHERE rand_assign = 'No';
+") 
+
+```
+
+Missing data for paper surveys that used random assignment was 21% while missing data for paper surveys that did not use random assignment was 20%
+
+
+## missing data for incentives
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(paper_missing)
+FROM RR_data 
+WHERE incentives = 'Yes';
+") #
+
+# No
+sqldf("
+SELECT AVG(paper_missing)
+FROM RR_data 
+WHERE incentives = 'No';
+") 
+```
+
+
+Missing data for paper surveys that used incentives was 18%, while missing data for paper surveys that did not use incentives was 68%.
+
+## missing data for reminders
+
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(paper_missing)
+FROM RR_data 
+WHERE  reminder = 'Yes';
+") 
+
+# No      
+sqldf("
+SELECT AVG(paper_missing)
+FROM RR_data 
+WHERE reminder = 'No';
+")
+
+```
+
+
+Missing data for paper surveys that used reminder was 28%, while missing data for paper surveys that did not use reminder was 7%.
+
+
+
+# missing data per feature - digital surveys 
+
+## missing data for random assignment
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(dig_missing)
+FROM RR_data 
+WHERE rand_assign = 'Yes';
+") 
+
+# No
+sqldf("
+SELECT AVG(dig_missing)
+FROM RR_data 
+WHERE rand_assign = 'No';
+") 
+
+```
+
+Missing data for the digital surveys that used random assignment was 9%, while missing data for digital surveys that did not use random assignment was 65%.
+
+
+## missing data for reminders
+
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(dig_missing)
+FROM RR_data 
+WHERE reminder = 'Yes';
+") 
+
+# No
+sqldf("
+SELECT AVG(dig_missing)
+FROM RR_data 
+WHERE reminder= 'No';
+") 
+
+```
+
+Missing data for digital surveys that used reminders was 6%, while  missing data for digital surveys that did not use reminder was 9%.
+
+## missing data for incentives
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(dig_missing)
+FROM RR_data 
+WHERE incentives = 'Yes';
+")
+
+# No
+sqldf("
+SELECT AVG(dig_missing)
+FROM RR_data 
+WHERE incentives= 'No';
+") 
+
+```
+
+Missing data for digital surveys that used reminders was 8%, while missing data for digital surveys that did not use reminder was 2%.
+
+
+
+
+
+

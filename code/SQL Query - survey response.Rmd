@@ -1,0 +1,185 @@
+---
+title: "SQL Query - survey response"
+output: html_notebook
+---
+
+
+# Get essentials 
+
+```{r}
+library(sqldf)
+
+RR_data <-readxl::read_xlsx("data/RR_data_3.xlsx")
+
+```
+
+# Response rate 
+
+```{r}
+
+# paper surveys 
+
+sqldf("
+SELECT AVG(Paper_surv)
+FROM RR_data;
+") 
+      
+# web surveys
+sqldf("
+SELECT AVG(dig_survey)
+FROM RR_data;
+")
+      
+```
+
+Paper surveys have an avergae of 67% while web surveys have an avergae of 55% response rate.
+
+
+# Response rate per feature - paper surveys 
+
+## response rate for random assignment
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(Paper_surv)
+FROM RR_data 
+WHERE rand_assign = 'Yes';
+")
+    
+# No  
+sqldf("
+SELECT AVG(Paper_surv)
+FROM RR_data 
+WHERE rand_assign = 'No';
+") 
+
+```
+
+Response rate for paper surveys that used random assignment was 65% while response rate for paper surveys that did not use random assignment was 72%
+
+
+## response rate for incentives
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(Paper_surv)
+FROM RR_data 
+WHERE incentives = 'Yes';
+") #
+
+# No
+sqldf("
+SELECT AVG(Paper_surv)
+FROM RR_data 
+WHERE incentives = 'No';
+") 
+```
+
+
+The response rate for paper surveys that used incentives was 66%, while the response rate for paper surveys that did not use incentives was 68%.
+
+## response rate for reminders
+
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(Paper_surv)
+FROM RR_data 
+WHERE  reminder = 'Yes';
+") 
+
+# No      
+sqldf("
+SELECT AVG(Paper_surv)
+FROM RR_data 
+WHERE reminder = 'No';
+")
+
+```
+
+
+The response rate for paper surveys that used reminder was 67%, while the response rate for paper surveys that did not use reminder was 68%.
+
+
+
+# Response rate per feature - digital surveys 
+
+## response rate for random assignment
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(dig_survey)
+FROM RR_data 
+WHERE rand_assign = 'Yes';
+") 
+
+# No
+sqldf("
+SELECT AVG(dig_survey)
+FROM RR_data 
+WHERE rand_assign = 'No';
+") 
+
+```
+
+The response rate for the digital surveys that used random assignment was 50%, while the response rate for digital surveys that did not use random assignment was 65%.
+
+
+## response rate for reminders
+
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(dig_survey)
+FROM RR_data 
+WHERE reminder = 'Yes';
+") 
+
+# No
+sqldf("
+SELECT AVG(dig_survey)
+FROM RR_data 
+WHERE reminder= 'No';
+") 
+
+```
+
+The response rate for digital surveys that used reminders was 53%, while  response rate for digital surveys that did not use reminder was 61%.
+
+## response rate for incentives
+
+```{r}
+
+# Yes
+sqldf("
+SELECT AVG(dig_survey)
+FROM RR_data 
+WHERE incentives = 'Yes';
+")
+
+# No
+sqldf("
+SELECT AVG(dig_survey)
+FROM RR_data 
+WHERE incentives= 'No';
+") 
+
+```
+
+The response rate for digital surveys that used reminders was 60%, while the response rate for digital surveys that did not use reminder was 52%.
+
+
+
+
+
+

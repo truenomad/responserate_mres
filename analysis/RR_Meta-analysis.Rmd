@@ -5,9 +5,8 @@ date: "22/01/2019"
 output:
   html_document:
     number_sections: yes
-    theme: cosmo
+    theme: readable
     toc: yes
-    toc_depth: 3
     toc_float: yes
   pdf_document:
     toc: yes
