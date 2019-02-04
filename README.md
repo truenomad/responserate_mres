@@ -49,7 +49,7 @@ In order to establish whether digital surveys are any better than paper surveys,
 
 
 ## Deliverables
-* [Markdown report](docs/index.html)
+* [Markdown report](https://truenomad.github.io/responserate_mres/)
 * [Project book](https://bookdown.org/mohamedayusuf87/SR_Report/)
 
 

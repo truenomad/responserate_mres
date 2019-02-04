@@ -26,23 +26,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 __Background__
 
-Recently, epidemiologists have started adopting digital surveys as a method for data collection. However, it is unknow whether these methods are any better than paper-based surveys.
+Recently, epidemiologists have adopted digital surveys as a method for data collection. However, it is unknow whether these methods are superior than paper-based surveys in terms of response rate.
 
 __Objective__
 
-We undertook a systematic review investigating the response rate differences between questionnaires administered by paper-based and those administered using digital platforms to collect exposure and/or outcome data in epidemiological studies.
+I undertook a systematic review investigating the response rate differences between questionnaires administered by paper-based and those administered using digital platforms to collect exposure and/or outcome data in epidemiological studies.
 
 __Methods__
 
-We searched through the peer-reviewed published literature for mixed-method epidemiological studies that use paper and digital surveys for data collection. We looked through Medline, Web of Science, CINAHL and PsychINFO. Data were extracted and effect size and study variance were calculated. Using this information, a random-effects model was conducted using R program. Additionally, in order to estimate the relationship between response rate and survey features, sub-group analysis was carried out.
+I searched peer-reviewed published literature for mixed-method epidemiological studies that used both paper and digital surveys for data collection. I searched through Medline, Web of Science, CINAHL and PsychINFO. Data were extracted and effect sizes and variances were calculated. Using this information, a random-effects model was conducted using R program. Additionally, in order to estimate the relationship between response rate and survey features, sub-group analysis was carried out for various features.
 
 __Results__
 
-Eighteen studies were selected, off which five had to be excluded from the meta-analysis as they were influential cases. Based on the random-effects model, the response rate difference was 5.90 (1.59 - 10.23) and the overall study heterogeneity was considerably high (I2 = 95%). Sub-group analysis revealed survey features had no impact on the response rate difference.
+Eighteen studies were selected, of which five were excluded from the meta-analysis as they were outliers. Based on the random-effects model, the response rate difference between paper and digital methods was 5.90 (1.59 - 10.23). The overall study heterogeneity was high (I2 = 95%). Sub-group analysis revealed survey features had no impact on the response rate difference.
 
 __Conclusion__
 
-We conclude that paper surveys a have slightly higher response rate than digital surveys, and that sub-group analysis of study features did not explain this difference.  However, due to the clinically and methodological heterogeneity of the reviewed studies, it is difficult to conclude anything from the meta-analytical findings of this review.
+Paper surveys a have slightly higher response rate than digital surveys. Sub-group analysis of study features did not explain this difference.  However, due to the clinically and methodological heterogeneity of the reviewed studies, it is difficult to firmly conclude whether paper based, or digital data collection methods are superior.
 
 
 ## Introduction 
